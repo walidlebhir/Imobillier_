@@ -21,6 +21,9 @@ class Entreprise(Base) :
     gestionnaire = relationship("User", back_populates="entreprise")
 
 
+    # relation avec propritaire : One to many  
+    proprietaire = relationship("Proprietaire" , back_populates="entreprise" , )
+
     # date creation et date de supresion 
     CreateAt = Column (DateTime(timezone=True) , server_default= func.now()) 
     UpdateAt =Column (DateTime(timezone=True),onupdate=func.now() , server_default=func.now() )
