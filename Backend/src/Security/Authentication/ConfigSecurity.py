@@ -1,25 +1,26 @@
 from passlib.context import CryptContext 
-from sqlalchemy.orm import session 
+from sqlalchemy.orm import Session 
 from Models.User import User 
-from ConfigSecurity import verificat_password 
 
-pwd_context = CryptContext(schemes=["bcrypt"] ,  deprecated="auto")
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # fonction pour hash Password 
 
-def Hash_password(password) : 
-    return pwd_context.hash(password) 
+def Hash_password(password : str) : 
+    safe_password = password.encode('utf-8')[:72].decode('utf-8', 'ignore')
+    return pwd_context.hash(safe_password)
 
 #function pour verification de password hashe 
 
 def verificat_password(OriginPassword , hashPassword ) :
-    
-    return pwd_context.verify(OriginPassword , hashPassword) 
+    safe_password = OriginPassword.encode('utf-8')[:72].decode('utf-8', 'ignore')
+    return pwd_context.verify(safe_password, hashPassword) 
 
 
 # authentication 
 
-def Authentication(db : session ,  username : str , password : str ) :
+
+def Authentication(db : Session ,  username : str , password : str ) :
     # recuperation des donnes 
     try : 
         user_auth = db.query(User).filter(User.email == username).first() 

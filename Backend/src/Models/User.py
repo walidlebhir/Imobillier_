@@ -16,21 +16,21 @@ class RoleUser(str ,Enum) :
 
 
 
-class User(Base) : 
-    __tablename__ = "users" 
-    id  = Column(UUID(as_uuid=True) , primary_key=True , default=uuid.uuid4 , unique=True , nullable=False)
-    Nom = Column(String , nullable=False) 
-    email = Column(String , nullable=False) 
-    password = Column(String , nullable = False) 
-    teliphone = Column(String) 
-    Role = Column(sqlEnum(RoleUser) , nullable=False , default=RoleUser.CLIENT) 
+class User(Base):
+    __tablename__ = "users"
+    id  = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True, nullable=False)
+    Nom = Column(String, nullable=False)
+    email = Column(String, nullable=False, unique=True)
+    password = Column(String, nullable=False)
+    teliphone = Column(String)
+    Role = Column(sqlEnum(RoleUser), nullable=False, default=RoleUser.CLIENT)
 
+    # Relation avec entreprise (One-to-One)
+    entreprise = relationship("Entreprise", back_populates="gestionnaire", uselist=False)
 
-    # Relation Entre entreprise et User -> gestionaire 
-    entreprise = relationship("Entreprise", back_populates="gestionnaire",uselist=False  )
+    # Relation avec réservation (One-to-One)
+    reservation = relationship("Reservation", back_populates="Clinet", uselist=False)
 
-
-
-    # date de creation et date de modefication Generer authematiquement par le server 
-    CreateAt = Column(DateTime(timezone=True) , server_default=func.now())
-    UpdateAt = Column(DateTime(timezone=True) ,onupdate=func.now() , server_default=func.now())
+    # date de création et modification
+    CreateAt = Column(DateTime(timezone=True), server_default=func.now())
+    UpdateAt = Column(DateTime(timezone=True), onupdate=func.now(), server_default=func.now())

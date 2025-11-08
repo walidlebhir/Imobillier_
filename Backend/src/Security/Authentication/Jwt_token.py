@@ -1,34 +1,20 @@
+import os
+from datetime import datetime, timedelta
+from jose import jwt
+from dotenv import load_dotenv
 
-from datetime import datetime , timedelta
-from  jose import jwt , JWTError 
-import secrets 
+load_dotenv()  # charge le fichier .env
 
-from dotenv import load_dotenv 
-import os 
+SECRE_KEY = os.getenv("SECRE_KEY")
+ALGORITHM = os.getenv("ALGORITHM", "HS256")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
 
-
-load_dotenv() 
-
-SECRE_KEY=os.getenv("SECRE_KEY")
-ALGORITHM="ALGORITHM"
-ACCESS_TOKEN_EXPIRE_MINUTES= os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES") 
-
-
-
-# generation Json web token 
-
-def create_acces_Token(dataUser : dict , expires_delta : timedelta | None=None) : 
-    
-    # creation une token de type JWT 
-    Data_encode = dataUser.copy() 
-    if expires_delta : 
-        # creation une temp d'expirete de login jwt dans cookies 
-        expires = datetime.utcnow()+expires_delta()
-    else : 
-        # si ona pas du temp prend par defaul 15 minut 
-        expires = datetime.utcnow()+expires_delta(minute = 15 )
-
-    Data_encode.update({"exp" : expires}) 
-    encode_Jwt = jwt.encode(Data_encode , SECRE_KEY , algorithm=ALGORITHM)
-
-    return encode_Jwt 
+def create_access_token(dataUser: dict, expires_delta: timedelta | None = None):
+    data = dataUser.copy()
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    data.update({"exp": expire})
+    encoded_jwt = jwt.encode(data, SECRE_KEY, algorithm=ALGORITHM)
+    return encoded_jwt

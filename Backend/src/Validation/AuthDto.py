@@ -8,7 +8,8 @@ class RegisterRequest(BaseModel) :
     role : RoleUser
 
 
-
-
+class LoginRequest(BaseModel) : 
+    username : EmailStr 
+    password : str 
 
 

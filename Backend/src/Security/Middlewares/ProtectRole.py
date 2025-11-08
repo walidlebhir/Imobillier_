@@ -1,18 +1,13 @@
-from fastapi import HTTPException , Depends , status
+from fastapi import HTTPException, Depends, status
 from ProtectConection import get_current_User
-from Models.User import User
+from Models.User import User, RoleUser
 
-# protect role 
-
-def require_role(required_role : str) :
-    def role_dependcy(curent_User :User = Depends(get_current_User) ) :
-        if curent_User.Role != required_role : 
+def require_role(required_role: RoleUser):
+    def role_dependency(current_user: User = Depends(get_current_User)):
+        if current_user.Role != required_role:
             raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN , 
-                detail="operation Non authorizer"
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Operation non autorisée"
             )
-        
-        return curent_User 
-    return role_dependcy
-
-
+        return current_user
+    return role_dependency
