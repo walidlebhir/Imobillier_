@@ -23,3 +23,4 @@ async def Login(form_Data :LoginRequest  , db:Session = Depends(get_db) ) :
     Contoller_auth = AuthController(db) 
     return Contoller_auth.Login(form_Data) 
 
+
