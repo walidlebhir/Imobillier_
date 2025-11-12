@@ -1,9 +1,9 @@
 from fastapi import HTTPException
-from Models.User import User 
+from src.Models.User import User
 from fastapi.security import OAuth2PasswordRequestForm
-from Validation.AuthDto import RegisterRequest , LoginRequest
-from Security.Authentication.ConfigSecurity import Hash_password , Authentication
-from Security.Authentication.Jwt_token import create_access_token
+from src.Validation.AuthDto import RegisterRequest , LoginRequest
+from src.Security.Authentication.ConfigSecurity import Hash_password , Authentication
+from src.Security.Authentication.Jwt_token import create_access_token
 
 
 class AuthController : 

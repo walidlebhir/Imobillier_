@@ -1,5 +1,5 @@
 from pydantic import BaseModel , Field
-
+from  decimal import  Decimal
 
 class EntrepriseRequest(BaseModel) : 
     Nom : str = Field(... , min_length=4 , max_length=40) 
@@ -8,3 +8,18 @@ class EntrepriseRequest(BaseModel) :
 
     class Config:
         allow_population_by_field_name = True
+
+
+class ProprietaireRequest(BaseModel) :
+    titre : str = Field(... , min_length=2 , max_length=50)
+    type_pro : str
+    surface :Decimal
+    chamber : int
+    ville : str
+    code_ville : str
+    quartie : str
+    prix : float
+    description : str
+
+
+

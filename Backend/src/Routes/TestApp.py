@@ -1,9 +1,9 @@
 from fastapi import APIRouter , Depends
 from sqlalchemy.orm import session
-from Config.DB import get_db
+from src.Config.DB import get_db
 
-from Validation.UserDto import UserCreate 
-from Controllers.TestController import TestUserContoller 
+from src.Validation.UserDto import UserCreate
+from src.Controllers.TestController import TestUserContoller
 
 AppRoutes = APIRouter() 
 

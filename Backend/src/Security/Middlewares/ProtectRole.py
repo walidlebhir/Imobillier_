@@ -1,6 +1,6 @@
 from fastapi import HTTPException, Depends, status
-from Security.Middlewares.ProtectConection import get_current_User
-from Models.User import User, RoleUser
+from src.Security.Middlewares.ProtectConection import get_current_User
+from src.Models.User import User, RoleUser
 
 def require_role(required_role: RoleUser):
     def role_dependency(current_user: User = Depends(get_current_User)):

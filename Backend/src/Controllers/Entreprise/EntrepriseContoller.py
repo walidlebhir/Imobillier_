@@ -1,10 +1,9 @@
 from fastapi import HTTPException ,  Depends , status
 from fastapi.responses import JSONResponse
-from Security.Middlewares.ProtectRole import require_role 
-from Models.User import User
-from Models.Entreprise import Entreprise 
-from Models.User import RoleUser
-from Validation.GestionaireDto import EntrepriseRequest
+from src.Security.Middlewares.ProtectRole import require_role
+from src.Models.User import  User
+from src.Models.Entreprise import  Entreprise
+from src.Validation.GestionaireDto import EntrepriseRequest
 
 class EntrepriseContollers : 
     def __init__(self , db ):
@@ -43,7 +42,18 @@ class EntrepriseContollers :
                 detail="Problemme dans le server "
             )
     
-    def getEntrep(self) : 
-        pass 
 
-    
+    # fonction recuperation des iformation sur entreprise :
+    def InfoEntreprise(self , userConecter : User):
+
+        try:
+            # Recuperation des donnes avec filtration des donnes
+            EntrepriseData = self.DataBase.query(Entreprise).filter(Entreprise.gestionaireId ==userConecter.id ).first()
+            return  EntrepriseData
+        except Exception as e :
+            # debug
+            print(f"Problemme dans le server {e}")
+            raise HTTPException(
+                status_code=501 ,
+                detail= f"Problemme dans le server {e}"
+            )

@@ -4,7 +4,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship 
 import uuid 
 from datetime import datetime
-from Config.DB import Base 
+from src.Config.DB import Base
 
 class Proprietaire(Base):
     __tablename__ = "proprietaire" 

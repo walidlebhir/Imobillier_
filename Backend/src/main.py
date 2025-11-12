@@ -1,17 +1,18 @@
 from fastapi import FastAPI
 
-from Routes.TestApp import AppRoutes 
-from Config.DB import Base , engine 
-from Routes.AuthRoute import AuthenticationRoute
-from Routes.AdminRoute import EntrepriseRoute
+from src.Routes.TestApp import AppRoutes
+from src.Config.DB import Base , engine
+from src.Routes.AuthRoute import AuthenticationRoute
+from src.Routes.AdminRoute import EntrepriseRoute
 
 # importation des model Pour la creation 
-from Models.User import User 
-from Models.Entreprise import Entreprise 
-from Models.Propritaire import Proprietaire
-from Models.Reservation import Reservation 
+from src.Models.User import User
+from src.Models.Entreprise import Entreprise
+from src.Models.Propritaire import Proprietaire
+from src.Models.Reservation import Reservation
 
-# creation des tables (Pour demarage de serveur ) 
+# creation des tables (Pour demarage de serveur )
+
 Base.metadata.create_all(bind=engine)
 
 

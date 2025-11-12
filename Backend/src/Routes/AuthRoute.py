@@ -1,11 +1,11 @@
 from fastapi import APIRouter , Depends
 from fastapi.security import OAuth2PasswordRequestForm
-from Validation.AuthDto import RegisterRequest , LoginRequest
-from sqlalchemy.orm import Session 
-from Config.DB import get_db
+from src.Validation.AuthDto import RegisterRequest , LoginRequest
+from sqlalchemy.orm import Session
+from src.Config.DB import get_db
 
 
-from Controllers.AuthenticationContoller import AuthController
+from src.Controllers.AuthenticationContoller import AuthController
 
 AuthenticationRoute = APIRouter() 
 

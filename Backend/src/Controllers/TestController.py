@@ -2,8 +2,8 @@ from sqlalchemy.orm import session
 from fastapi import Depends  , HTTPException 
 from fastapi.responses import JSONResponse 
 
-from Validation.UserDto import UserCreate 
-from Models.User import User 
+from src.Validation.UserDto import UserCreate
+from src.Models.User import User
 
 
 class TestUserContoller : 

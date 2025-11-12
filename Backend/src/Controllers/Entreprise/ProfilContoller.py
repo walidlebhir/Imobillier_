@@ -1,6 +1,7 @@
 from fastapi import Depends , HTTPException 
-from Models.User import RoleUser , User
-from Security.Middlewares.ProtectRole import require_role 
+from src.Models.User import User , RoleUser
+
+
 
 
 class ProfilController : 
@@ -12,4 +13,8 @@ class ProfilController :
         return {
             "data" : userConcter
         }
-    
+
+
+    def changePassword(self):
+        pass
+
