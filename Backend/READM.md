@@ -1,5 +1,6 @@
 
-* Demarage projet -- uvicorn main:app --reload  --- 
+* Demarage projet -- uvicorn src.main:app --reload  --port=? 
+* demarage sous derictory Backend>
 * Projet utilise l'enverenement "requirement.txt" comme envernement Fast Api (api) 
 * pour installation de l'enverenment -> pip install -r requitement.txt 
 * L'endroite de demarage de server cd Backend/src 
@@ -8,4 +9,4 @@
 * Pour controller ona chaque Service A une module Controller 
 * main.py ----> Routes ----> Controller (Traitement avec archetceture    injcetion de depnedance OOP )
 
-
+* 

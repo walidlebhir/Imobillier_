@@ -59,14 +59,58 @@ class PropietaireControllers :
 
 
     def ShowALL(self):
-        pass
+        # Recuperation des donnes
+        try:
+            DataProp = self.database.query(Proprietaire).all()
+            return  DataProp
+        except Exception as e :
+            # debug
+            print(f"Problemme dans le systme {e}")
+            raise HTTPException(
+                status_code=501 ,
+                detail=f"Problemme dans le server "
+            )
 
-    def ShowOne(self):
-        pass
+    def ShowOne(self , id :int ):
+        try:
+            One_Prop = self.database.query(Proprietaire).filter(Proprietaire.id == id).first()
+            return  One_Prop
+        except Exception as Erreur :
+            print(f"Problemme dans le server  {Erreur}")
+            raise  HTTPException(
+                status_code=501 ,
+                detail=f"Problemme dans le server {Erreur}"
+            )
 
     def update(self):
         pass
 
 
     def delete(self):
-        pass
+        # supresion
+        try:
+            pass
+        except Exception as erreur :
+            print(f"Problemme dans le server {erreur}")
+            raise HTTPException(
+                status_code=501,
+                detail= f"Problemme dans le server {erreur}"
+            )
+
+    def Search(self , searchData : str):
+        # ->> fonctionalite pour efectue search
+        try:
+            dataSearch = self.database.query(Proprietaire).filter(Proprietaire.titre.like(f"%{searchData}%"))
+            if not dataSearch :
+                raise  HTTPException(
+                    status_code=401 ,
+                    detail= "Data not found "
+                )
+
+            return  dataSearch
+        except Exception as erreur :
+            print(f"Problemme dans le server {erreur}")
+            raise HTTPException(
+                status_code=501 ,
+                detail=f"Problemme dans le server {erreur}"
+            )

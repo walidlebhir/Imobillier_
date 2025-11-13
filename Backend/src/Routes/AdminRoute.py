@@ -52,12 +52,15 @@ async  def CreateNewPro( DataCreate : ProprietaireRequest,
 
 
 @EntrepriseRoute.get("/get/Proprietaire" , response_model=List[ProprietaireResponse])
-async def getProprietaire() :
-    pass
+async def getProprietaire(db :Session = Depends(get_db)) :
+    controllerPro = PropietaireControllers(db)
+    return  controllerPro.ShowALL();
 
 @EntrepriseRoute.get("/get/onepropritaire/{id}" , response_model=ProprietaireResponse)
-async def geOnePropritaire(id : int) :
-    pass
+async def geOnePropritaire(id : int , db : Session = Depends(get_db)) :
+    ControllerPro = PropietaireControllers(db)
+    return ControllerPro.ShowOne(id)
+
 
 @EntrepriseRoute.delete("/delete/proprietaire/{id}")
 async def DeleteProprietaire(id : int ) :
