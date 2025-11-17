@@ -1,10 +1,13 @@
 from fastapi import HTTPException , responses , status
-from fastapi.responses import Response
+from fastapi.responses import JSONResponse
+from uuid import  UUID
 from src.Models.Propritaire import Proprietaire
+from src.Models.Entreprise import Entreprise
 from src.Validation.GestionaireDto import ProprietaireRequest
 from src.Models.User import  User
-from src.Models.Entreprise import  Entreprise
-
+from cloudinary.uploader import  upload
+from src.Models.photo import Photo
+from src.Config import  configCloudinary
 
 # Class Pour manipulation des propritaire
 
@@ -20,7 +23,7 @@ class PropietaireControllers :
         * show all (liste --> pagination ) 
     '''
 
-    def CreateProprietaire(self, UserConnecter : User , dataCreate : ProprietaireRequest):
+    def CreateProprietaire(self, UserConnecter : User , dataCreate : ProprietaireRequest ):
         try :
             # Recuperation entreprise
             entrepriseData = self.database.query(Entreprise).filter(Entreprise.gestionaireId == UserConnecter.id).first()
@@ -43,11 +46,9 @@ class PropietaireControllers :
             self.commit()
             self.refresh(NewPro)
 
-            return  Response(
+            return  JSONResponse(
                 status_code=status.HTTP_201_CREATED ,
-                content= {
-                    "message" : "new propritaire create with succes "
-                }
+                content="proprietaire cree avec succes "
             )
         except Exception as e :
             # debug
@@ -56,6 +57,35 @@ class PropietaireControllers :
                 status_code=501 ,
                 detail= f"problemme dans le server {e}"
             )
+
+    def UploadFile(self , id:UUID  , files = None):
+        # ---> uplodre file Imgaes dans Cloudinary
+
+        try:
+            if files :
+                for file in files :
+                    Resultatuplode = upload(file.file , folder="proprietaireImages")
+                    NewImages =Photo(
+                        url = Resultatuplode['secure_url'] ,
+                        publicId = Resultatuplode['public_id'] ,
+                        proprietaireid = id
+
+                    )
+                    # ajoutant dans la base de donnes
+                    self.database.add(NewImages)
+                self.database.commit()
+
+            return  {
+                "message" : "images uplode with succes "
+            }
+        except Exception as e :
+            # dbeug
+            print(f"problemme dans le server {e} ")
+            raise  HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR ,
+                detail=f"problemme dans le server "
+            )
+
 
 
     def ShowALL(self):

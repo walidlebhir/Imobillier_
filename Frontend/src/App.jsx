@@ -1,13 +1,42 @@
 import React  from "react"
-
+import { Route, Routes } from "react-router-dom"
+import HomPage from "./pages/HomPage"
+import LoginPage from "./pages/LoginPage"
+import RegisterPage from "./pages/RegisterPage"
+import { Toaster } from "react-hot-toast"
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
-   <>
-    <h1>helow app </h1>
-    </>
+    <div data-theme="light">
+
+
+      <Routes>
+        {/** creation Routes Pour application  */}
+        <Route path="/" element={<HomPage />} />
+        <Route path="/login/page" element={<LoginPage />} /> 
+        <Route path="/Register/page" element={<RegisterPage />} /> 
+
+
+        {/** Routes Pour manager  */}
+        <Route>
+
+
+        </Route>
+
+
+
+      </Routes>
+
+
+      <Toaster />
+
+
+    </div>
+
+
+    
   )
 }
 

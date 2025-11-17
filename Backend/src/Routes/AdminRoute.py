@@ -1,5 +1,7 @@
-from fastapi import APIRouter , HTTPException , Depends 
-from sqlalchemy.orm import Session 
+from fastapi import APIRouter, UploadFile,Form, File , HTTPException , Depends
+from sqlalchemy.orm import Session
+from starlette.responses import JSONResponse
+from uuid import  UUID
 from src.Config.DB import get_db
 from src.Security.Middlewares.ProtectRole import require_role
 from src.Models.User import RoleUser
@@ -12,6 +14,7 @@ from src.Models.User import User
 from src.Validation.GestionaireDto import ProprietaireRequest
 from src.Validation.Dataresponse import ProprietaireResponse
 
+import  json
 from typing import List
 
 
@@ -41,14 +44,24 @@ async def getEntreprise(db:Session = Depends(get_db) , current_user = Depends(re
 
 #--> proprietaire routes
 
-@EntrepriseRoute.post("/create/newProprietaire")
+@EntrepriseRoute.post("/create/newProprietaire" )
 async  def CreateNewPro( DataCreate : ProprietaireRequest,
                         db : Session = Depends(get_db) ,
                         currentUser : User = Depends(require_role(RoleUser.GESTIONAIRE)) ,
                         ) :
 
     controllerProp = PropietaireControllers(db)
-    return  controllerProp.CreateProprietaire(currentUser , DataCreate)
+    return  controllerProp.CreateProprietaire(currentUser , DataCreate , files)
+
+@EntrepriseRoute.post("/uploder/images/{id}")
+async  def UploaderImages(
+                            id :UUID ,
+                            files : List[UploadFile] =File(...) ,
+                            db:Session = Depends(get_db) ,
+                            currentUser : User = Depends(require_role(RoleUser.GESTIONAIRE))
+                          ) :
+    controllerGestionaire = PropietaireControllers(db)
+    return  controllerGestionaire.UploadFile(id , files)
 
 
 @EntrepriseRoute.get("/get/Proprietaire" , response_model=List[ProprietaireResponse])

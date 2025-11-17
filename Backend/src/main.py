@@ -1,3 +1,4 @@
+from dotenv import  load_dotenv
 from fastapi import FastAPI
 
 from src.Routes.TestApp import AppRoutes
@@ -10,8 +11,10 @@ from src.Models.User import User
 from src.Models.Entreprise import Entreprise
 from src.Models.Propritaire import Proprietaire
 from src.Models.Reservation import Reservation
-
+from src.Models.photo import  Photo
 # creation des tables (Pour demarage de serveur )
+
+load_dotenv()
 
 Base.metadata.create_all(bind=engine)
 

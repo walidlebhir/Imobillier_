@@ -1,13 +1,18 @@
+from dotenv import load_dotenv
 import os
 from datetime import datetime, timedelta
 from jose import jwt
-from dotenv import load_dotenv
 
-load_dotenv()  # charge le fichier .env
 
-SECRE_KEY = os.getenv("SECRE_KEY")
+load_dotenv()
+
+
+secret = "MYKey"
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
+
+if secret is None :
+    raise ValueError("Problemme dan sle key ")
 
 def create_access_token(dataUser: dict, expires_delta: timedelta | None = None):
     data = dataUser.copy()
@@ -16,5 +21,5 @@ def create_access_token(dataUser: dict, expires_delta: timedelta | None = None):
     else:
         expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     data.update({"exp": expire})
-    encoded_jwt = jwt.encode(data, SECRE_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(data, secret, algorithm=ALGORITHM)
     return encoded_jwt

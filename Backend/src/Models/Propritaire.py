@@ -27,6 +27,9 @@ class Proprietaire(Base):
     # Relation avec Reservation
     reservation = relationship("Reservation", back_populates="Propritaire", uselist=False)
 
+    # Relation Entre les images
+    images = relationship("Photo", back_populates="proprietaire", cascade="all, delete-orphan")
+
     # Dates
     CreateAt = Column(DateTime(timezone=True), server_default=func.now())
     UpdateAt = Column(DateTime(timezone=True), onupdate=func.now(), server_default=func.now())
