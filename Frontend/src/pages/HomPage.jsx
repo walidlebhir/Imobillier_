@@ -1,317 +1,367 @@
-import React from 'react';
-import { 
-  CalendarDaysIcon,
-  ChatBubbleLeftRightIcon,
-  SparklesIcon,
-  BuildingStorefrontIcon,
-  ShieldCheckIcon,
-  ChartBarIcon,
-  PlayCircleIcon,
-  CheckBadgeIcon,
-  HomeIcon,
-  MapPinIcon,
-  StarIcon
-} from '@heroicons/react/24/outline';
+import React from 'react'
+import NavBarApp from '../Components/NavBarApp' 
+import Footer from '../Components/Fotter'
 
-import NavBarApp from '../Components/NavBarApp';
-import Footer from '../Components/Fotter';
+// Import des icônes Heroicons
+import {
+  // Hero Section
+  CheckBadgeIcon,
+  PlayCircleIcon,
+  
+  // AI Features Section
+  ChatBubbleLeftRightIcon,
+  ChartBarIcon,
+  UserGroupIcon,
+  
+  // Communication Tools
+  EnvelopeIcon,
+  PhoneIcon,
+  ChatBubbleBottomCenterTextIcon,
+  
+  // Analytics Section
+  ArrowTrendingUpIcon,
+  UserPlusIcon,
+  ClockIcon,
+  
+  // Testimonials & General
+  StarIcon,
+  CheckIcon,
+  RocketLaunchIcon,
+  BuildingOfficeIcon,
+  HomeModernIcon,
+  MapPinIcon,
+  ShieldCheckIcon
+} from '@heroicons/react/24/solid'
+
+import {
+  // Outline icons for variety
+  BuildingStorefrontIcon,
+  DevicePhoneMobileIcon,
+  ChartBarSquareIcon,
+  HeartIcon
+} from '@heroicons/react/24/outline'
 
 export default function HomePage() {
-  const features = [
-    {
-      icon: CalendarDaysIcon,
-      title: "Rendez-vous Intelligents",
-      description: "Planifiez et gérez vos visites immobilières en quelques clics. Plus de double-booking, plus de conflits d'horaire.",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      icon: ChatBubbleLeftRightIcon,
-      title: "Communication Centralisée",
-      description: "Messagerie intégrée entre clients et agents. Échangez documents, photos et informations en temps réel.",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      icon: SparklesIcon,
-      title: "AI Predictions",
-      description: "Notre intelligence artificielle analyse le marché et prédit les tendances pour des décisions éclairées.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      icon: ShieldCheckIcon,
-      title: "Sécurité des Données",
-      description: "Vos données sont cryptées et sécurisées. Conformité RGPD garantie pour une tranquillité d'esprit totale.",
-      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    }
-  ];
-
-  const stats = [
-    { number: "10K+", label: "Biens Disponibles", icon: HomeIcon },
-    { number: "500+", label: "Agences Partenaires", icon: BuildingStorefrontIcon },
-    { number: "50K+", label: "Rendez-vous/mois", icon: CalendarDaysIcon },
-    { number: "98%", label: "Satisfaction Clients", icon: StarIcon }
-  ];
-
-  const steps = [
-    {
-      step: "01",
-      title: "Recherchez",
-      description: "Trouvez le bien idéal avec notre moteur de recherche avancé",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      step: "02",
-      title: "Planifiez",
-      description: "Choisissez un créneau disponible et réservez en ligne",
-      image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      step: "03",
-      title: "Visitez",
-      description: "Rencontrez l'agent et découvrez le bien en personne",
-      image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      step: "04",
-      title: "Finalisez",
-      description: "Finalisez avec notre accompagnement personnalisé",
-      image: "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    }
-  ];
-
-  const properties = [
-    {
-      image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      type: "Appartement",
-      location: "Paris 16ème",
-      price: "750,000 €"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      type: "Villa",
-      location: "Côte d'Azur",
-      price: "1,200,000 €"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      type: "Loft",
-      location: "Lyon",
-      price: "450,000 €"
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-white">
       <NavBarApp />
       
-      {/* Hero Section avec image d'arrière-plan */}
-      <section className="relative bg-gray-900 text-white">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
-          style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")'
-          }}
-        ></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="text-center lg:text-left">
-              <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-                Trouvez Votre
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-                  Maison de Rêve
-                </span>
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white relative overflow-hidden pt-20">
+        <div className="absolute inset-0 bg-black opacity-20"></div>
+        <div className="container mx-auto px-6 py-24 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between">
+            <div className="lg:w-1/2 mb-12 lg:mb-0">
+              <div className="inline-flex items-center bg-blue-800/30 border border-blue-400/30 rounded-full px-5 py-3 mb-8">
+                <CheckBadgeIcon className="w-5 h-5 text-green-400 mr-3" />
+                <span className="text-sm font-semibold">Plateforme IA révolutionnaire</span>
+              </div>
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-8">
+                Intelligence Immobilière
+                <span className="text-blue-400"> 2.0</span>
               </h1>
-              <p className="text-xl lg:text-2xl mb-8 text-gray-200 max-w-2xl">
-                La plateforme immobilière intelligente qui connecte acheteurs, vendeurs et professionnels
+              <p className="text-xl mb-8 text-blue-100 leading-relaxed">
+                Connectez, communiquez et concluez avec notre suite d'outils IA 
+                dédiée aux professionnels de l'immobilier et leurs clients.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <button className="px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center">
-                  <HomeIcon className="h-5 w-5 mr-2" />
-                  Explorer les Biens
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <button className="flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                  <RocketLaunchIcon className="w-5 h-5" />
+                  <span>Démarrer l'essai gratuit</span>
                 </button>
-                <button className="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-gray-900 transition duration-200 flex items-center justify-center">
-                  <PlayCircleIcon className="h-5 w-5 mr-2" />
-                  Voir la Démo
+                <button className="flex items-center justify-center space-x-3 border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-blue-900 transition-all duration-300">
+                  <PlayCircleIcon className="w-5 h-5" />
+                  <span>Voir la démo</span>
                 </button>
               </div>
-            </div>
-            <div className="relative">
-              <div className="bg-white rounded-2xl shadow-2xl p-6 transform rotate-1 hover:rotate-0 transition duration-500">
-                <img 
-                  src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                  alt="Maison moderne"
-                  className="w-full h-64 object-cover rounded-xl mb-4"
-                />
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Villa Moderne</h3>
-                    <p className="text-gray-600 flex items-center">
-                      <MapPinIcon className="h-4 w-4 mr-1" />
-                      Nice, France
-                    </p>
+              <div className="flex items-center text-sm text-blue-200">
+                <div className="flex -space-x-2 mr-4">
+                  <div className="w-10 h-10 bg-blue-400 rounded-full border-2 border-slate-900 flex items-center justify-center">
+                    <BuildingOfficeIcon className="w-5 h-5 text-white" />
                   </div>
-                  <div className="text-right">
-                    <p className="text-2xl font-bold text-blue-600">850,000 €</p>
-                    <button className="text-sm text-blue-600 hover:text-blue-700 font-semibold">
-                      Voir détails →
-                    </button>
+                  <div className="w-10 h-10 bg-green-400 rounded-full border-2 border-slate-900 flex items-center justify-center">
+                    <HomeModernIcon className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="w-10 h-10 bg-purple-400 rounded-full border-2 border-slate-900 flex items-center justify-center">
+                    <ShieldCheckIcon className="w-5 h-5 text-white" />
                   </div>
                 </div>
+                <span className="font-medium">Rejoignez 500+ agences qui nous font confiance</span>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section améliorée */}
-      <section className="py-20 bg-gradient-to-r from-blue-50 to-indigo-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div key={index} className="text-center bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition duration-300">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-                    <Icon className="h-8 w-8 text-blue-600" />
-                  </div>
-                  <div className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
-                    {stat.number}
-                  </div>
-                  <div className="text-gray-600 font-medium">{stat.label}</div>
+            <div className="lg:w-1/2">
+              <div className="relative">
+                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-2xl">
+                  <img 
+                    src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1073&q=80" 
+                    alt="Dashboard IA immobilier"
+                    className="rounded-xl w-full h-80 object-cover"
+                  />
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section avec images */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Une Expérience Immobilière Réinventée
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Découvrez comment nous transformons la recherche immobilière avec la technologie
-            </p>
-          </div>
-
-          <div className="space-y-16">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              const isEven = index % 2 === 0;
-              
-              return (
-                <div 
-                  key={index}
-                  className={`flex flex-col lg:flex-row gap-12 items-center ${
-                    isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                  }`}
-                >
-                  <div className="lg:w-1/2">
-                    <div className="relative">
-                      <img 
-                        src={feature.image}
-                        alt={feature.title}
-                        className="w-full h-80 lg:h-96 object-cover rounded-2xl shadow-2xl"
-                      />
-                      <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-2xl shadow-xl">
-                        <Icon className="h-8 w-8" />
-                      </div>
+                {/* Floating AI Card */}
+                <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-5 shadow-2xl border border-gray-200">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                      <ChatBubbleLeftRightIcon className="w-6 h-6 text-green-600" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-800">Assistant IA</div>
+                      <div className="text-sm text-gray-600">Prédictions précises</div>
                     </div>
                   </div>
-                  <div className="lg:w-1/2">
-                    <h3 className="text-3xl font-bold text-gray-900 mb-6">
-                      {feature.title}
-                    </h3>
-                    <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                      {feature.description}
-                    </p>
-                    <button className="px-6 py-3 border-2 border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-600 hover:text-white transition duration-200">
-                      En savoir plus
-                    </button>
-                  </div>
                 </div>
-              );
-            })}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Properties Showcase */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Biens Exclusifs
-            </h2>
-            <p className="text-xl text-gray-600">
-              Découvrez nos propriétés sélectionnées avec soin
-            </p>
+      {/* Partners Section */}
+      <section className="py-16 bg-gray-50 border-b">
+        <div className="container mx-auto px-6">
+          <div className="text-center text-gray-500 text-sm mb-12 flex items-center justify-center">
+            <ShieldCheckIcon className="w-5 h-5 mr-3" />
+            <span className="font-semibold">Ils nous font confiance</span>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {properties.map((property, index) => (
-              <div key={index} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden group">
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={property.image}
-                    alt={property.type}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition duration-500"
-                  />
-                  <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    Nouveau
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{property.type}</h3>
-                  <p className="text-gray-600 flex items-center mb-4">
-                    <MapPinIcon className="h-4 w-4 mr-2" />
-                    {property.location}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-2xl font-bold text-blue-600">{property.price}</span>
-                    <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">
-                      Visiter
-                    </button>
-                  </div>
-                </div>
+          <div className="flex flex-wrap justify-center items-center gap-16 opacity-70">
+            {['Orpi', 'Century 21', 'Laforêt', 'Sotheby\'s', 'Barnes'].map((brand, index) => (
+              <div key={index} className="text-xl font-semibold text-gray-700 flex items-center">
+                <BuildingStorefrontIcon className="w-6 h-6 mr-3 text-blue-600" />
+                <span>{brand}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How It Works Section améliorée */}
+      {/* AI Features Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Simple et Efficace
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              Technologie IA Avancée
             </h2>
-            <p className="text-xl text-gray-600">
-              Votre projet immobilier en 4 étapes simples
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Des outils intelligents qui transforment votre façon de travailler 
+              dans l'immobilier
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="space-y-8">
+                {[
+                  {
+                    icon: <ChatBubbleLeftRightIcon className="w-6 h-6 text-blue-600" />,
+                    title: 'Assistant IA Conversationnel',
+                    desc: 'Chatbot intelligent qui répond aux questions des clients 24/7 et qualifie les leads automatiquement'
+                  },
+                  {
+                    icon: <ChartBarIcon className="w-6 h-6 text-blue-600" />,
+                    title: 'Prédiction de Prix IA',
+                    desc: 'Estimation précise basée sur l\'analyse de millions de données du marché'
+                  },
+                  {
+                    icon: <UserGroupIcon className="w-6 h-6 text-blue-600" />,
+                    title: 'Matching Intelligent',
+                    desc: 'Algorithmes qui connectent automatiquement acheteurs et biens pertinents'
+                  }
+                ].map((feature, index) => (
+                  <div key={index} className="flex space-x-6 group hover:bg-blue-50 p-6 rounded-2xl transition-all duration-300">
+                    <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-200 transition-colors duration-300">
+                      {feature.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                        {feature.title}
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed">
+                        {feature.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 border border-gray-200 shadow-lg">
+              <img 
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                alt="Interface IA"
+                className="rounded-xl w-full h-96 object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Communication Tools */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              Communication Unifiée
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Tous vos canaux de communication centralisés en un seul endroit
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <ChatBubbleBottomCenterTextIcon className="w-6 h-6" />,
+                title: 'Messagerie Intelligente',
+                features: ['Chat en temps réel', 'Templates personnalisés', 'Réponses automatiques']
+              },
+              {
+                icon: <PhoneIcon className="w-6 h-6" />,
+                title: 'Centre d\'Appels Intégré',
+                features: ['Appels VoIP', 'Enregistrement', 'Analytique des appels']
+              },
+              {
+                icon: <EnvelopeIcon className="w-6 h-6" />,
+                title: 'Email Automation',
+                features: ['Campagnes automatiques', 'Suivi des leads', 'Analytics détaillés']
+              }
+            ].map((tool, index) => (
+              <div key={index} className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 group">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                  {tool.icon}
+                </div>
+                <h3 className="text-2xl font-semibold text-gray-800 mb-6">
+                  {tool.title}
+                </h3>
+                <ul className="space-y-4">
+                  {tool.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-center text-gray-600">
+                      <CheckIcon className="w-5 h-5 text-green-500 mr-4" />
+                      <span className="font-medium">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Analytics & Predictions */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="bg-gradient-to-br from-slate-900 to-blue-900 rounded-2xl p-8 text-white shadow-2xl">
+                <h3 className="text-3xl font-bold mb-8 flex items-center">
+                  <ChartBarSquareIcon className="w-8 h-8 mr-4" />
+                  Analytics en Temps Réel
+                </h3>
+                <div className="space-y-6">
+                  {[
+                    { 
+                      icon: <ArrowTrendingUpIcon className="w-6 h-6 text-green-400" />,
+                      label: 'Taux de conversion', 
+                      value: '68%', 
+                      trend: '+12%' 
+                    },
+                    { 
+                      icon: <UserPlusIcon className="w-6 h-6 text-blue-400" />,
+                      label: 'Leads qualifiés', 
+                      value: '124', 
+                      trend: '+8%' 
+                    },
+                    { 
+                      icon: <ClockIcon className="w-6 h-6 text-yellow-400" />,
+                      label: 'Temps de réponse moyen', 
+                      value: '2.4min', 
+                      trend: '-45%' 
+                    }
+                  ].map((metric, index) => (
+                    <div key={index} className="flex justify-between items-center py-4 border-b border-blue-700/50">
+                      <div className="flex items-center space-x-4">
+                        {metric.icon}
+                        <span className="font-medium">{metric.label}</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-lg">{metric.value}</div>
+                        <div className="text-sm text-green-400 font-medium">{metric.trend}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div>
+              <h2 className="text-4xl font-bold text-gray-800 mb-8">
+                Data & Prédictions
+              </h2>
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                Notre IA analyse les tendances du marché en temps réel et vous 
+                fournit des insights actionnables pour optimiser vos stratégies.
+              </p>
+              <div className="space-y-5">
+                {[
+                  'Prédiction de demande par zone géographique',
+                  'Recommandations de prix optimaux',
+                  'Détection de leads chauds',
+                  'Alertes marché personnalisées'
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-center space-x-4 group hover:bg-gray-50 p-4 rounded-xl transition-colors duration-200">
+                    <div className="w-7 h-7 bg-green-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                      <CheckIcon className="w-4 h-4 text-white" />
+                    </div>
+                    <span className="text-gray-700 font-medium">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Additional Features Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              Fonctionnalités Complémentaires
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Tout ce dont vous avez besoin pour exceller dans l'immobilier moderne
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {steps.map((step, index) => (
-              <div key={index} className="text-center group">
-                <div className="relative mb-8">
-                  <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto group-hover:scale-110 transition duration-300 shadow-lg">
-                    {step.step}
-                  </div>
-                  <img 
-                    src={step.image}
-                    alt={step.title}
-                    className="w-full h-48 object-cover rounded-2xl mt-6 shadow-lg group-hover:shadow-xl transition duration-300"
-                  />
+            {[
+              {
+                icon: <MapPinIcon className="w-8 h-8 text-blue-600" />,
+                title: 'Géolocalisation Avancée',
+                desc: 'Analyse des zones stratégiques'
+              },
+              {
+                icon: <DevicePhoneMobileIcon className="w-8 h-8 text-green-600" />,
+                title: 'Application Mobile',
+                desc: 'Gestion depuis votre smartphone'
+              },
+              {
+                icon: <HeartIcon className="w-8 h-8 text-red-600" />,
+                title: 'Gestion des Favoris',
+                desc: 'Suivi des biens préférés'
+              },
+              {
+                icon: <ShieldCheckIcon className="w-8 h-8 text-purple-600" />,
+                title: 'Sécurité Maximale',
+                desc: 'Données cryptées et sécurisées'
+              }
+            ].map((feature, index) => (
+              <div key={index} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 text-center group hover:transform hover:-translate-y-2">
+                <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-100 transition-colors duration-300">
+                  {feature.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  {step.title}
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                  {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {step.description}
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {feature.desc}
                 </p>
               </div>
             ))}
@@ -319,75 +369,88 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* AI Prediction Section avec image */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                L'Intelligence Artificielle au Service de Votre Projet
-              </h2>
-              <p className="text-xl mb-8 opacity-90">
-                Notre technologie analyse des millions de données pour vous guider vers les meilleures décisions
-              </p>
-              <ul className="space-y-4 mb-8">
-                {[
-                  "Analyse de marché en temps réel",
-                  "Prédictions de valorisation précises",
-                  "Recommandations personnalisées",
-                  "Alertes opportunités exclusives"
-                ].map((item, index) => (
-                  <li key={index} className="flex items-center text-lg">
-                    <CheckBadgeIcon className="h-6 w-6 text-green-400 mr-3 flex-shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <button className="px-8 py-4 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-200 shadow-lg">
-                Découvrir l'AI
-              </button>
-            </div>
-            <div className="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                alt="AI Analytics"
-                className="w-full rounded-2xl shadow-2xl"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-white text-gray-900 p-6 rounded-2xl shadow-xl">
-                <div className="flex items-center space-x-3">
-                  <ChartBarIcon className="h-8 w-8 text-green-500" />
+      {/* Testimonials */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              Ils parlent de nous
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Marie Lambert",
+                company: "CEO, ImmoPro",
+                text: "L'IA de prédiction a augmenté nos ventes de 40% en 3 mois.",
+                avatar: "ML",
+                rating: 5
+              },
+              {
+                name: "Thomas Dubois",
+                company: "Directeur, Elite Immobilier",
+                text: "La communication unifiée a divisé notre temps de traitement par 2.",
+                avatar: "TD",
+                rating: 5
+              },
+              {
+                name: "Sophie Martin",
+                company: "Agent immobilier indépendant",
+                text: "L'assistant IA répond à mes clients même quand je dors !",
+                avatar: "SM",
+                rating: 5
+              }
+            ].map((testimonial, index) => (
+              <div key={index} className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
+                <div className="flex items-center mb-6">
+                  <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center font-semibold text-blue-600 mr-4">
+                    {testimonial.avatar}
+                  </div>
                   <div>
-                    <div className="font-bold text-lg">+5.2%</div>
-                    <div className="text-sm text-gray-600">Prédiction 2024</div>
+                    <div className="font-semibold text-gray-800">{testimonial.name}</div>
+                    <div className="text-sm text-gray-600">{testimonial.company}</div>
                   </div>
                 </div>
+                <div className="flex mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <StarIcon key={i} className="w-5 h-5 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-gray-700 italic leading-relaxed">"{testimonial.text}"</p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section finale */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-700 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            Prêt à Commencer Votre Aventure Immobilière ?
+      {/* Final CTA */}
+      <section className="py-20 bg-gradient-to-r from-slate-900 to-blue-900 text-white">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-4xl font-bold mb-8">
+            Prêt pour la révolution IA ?
           </h2>
-          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Rejoignez des milliers de personnes qui ont déjà trouvé leur bien idéal grâce à notre plateforme.
+          <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto leading-relaxed">
+            Rejoignez l'avenir de l'immobilier avec notre plateforme tout-en-un 
+            alimentée par l'intelligence artificielle.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition duration-200 shadow-lg hover:shadow-xl text-lg">
-              Commencer Gratuitement
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+            <button className="flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 mx-auto sm:mx-0">
+              <RocketLaunchIcon className="w-5 h-5" />
+              <span>Essai gratuit 30 jours</span>
             </button>
-            <button className="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition duration-200 text-lg">
-              Parler à un Expert
+            <button className="flex items-center justify-center space-x-3 border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-slate-900 transition-all duration-300 mx-auto sm:mx-0">
+              <PlayCircleIcon className="w-5 h-5" />
+              <span>Demander une démo</span>
             </button>
+          </div>
+          <div className="text-sm text-blue-200 flex items-center justify-center">
+            <ShieldCheckIcon className="w-5 h-5 mr-3" />
+            <span>Aucune carte de crédit requise • Configuration en 5 minutes</span>
           </div>
         </div>
       </section>
 
       <Footer />
     </div>
-  );
+  )
 }

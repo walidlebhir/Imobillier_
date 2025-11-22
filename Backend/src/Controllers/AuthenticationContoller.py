@@ -11,6 +11,7 @@ class AuthController :
     def __init__(self , db):
         self.db = db 
 
+
     def Register(self , UserRegister : RegisterRequest ) : 
 
         # verification User exit 
@@ -50,7 +51,8 @@ class AuthController :
                 status_code=501 , 
                 detail= "Erreur server "
             )
-    
+
+
     def Login(self , dataLogin : LoginRequest ) : 
         userAuth = Authentication(self.db , dataLogin.username , dataLogin.password) 
         if not userAuth : 

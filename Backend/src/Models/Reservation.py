@@ -21,6 +21,8 @@ class Reservation(Base) :
     id_proprietaire = Column(UUID(as_uuid=True) , ForeignKey("proprietaire.id") , unique=True)
     Propritaire = relationship("Proprietaire" , back_populates="reservation") 
 
+    # date de reservation
+    date_reservation = Column(DateTime(timezone=True) , nullable=False)
 
     # date de creation et de modefication automatique 
     CreateAt = Column (DateTime(timezone=True) , server_default= func.now()) 

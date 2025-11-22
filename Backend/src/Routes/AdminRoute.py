@@ -51,7 +51,7 @@ async  def CreateNewPro( DataCreate : ProprietaireRequest,
                         ) :
 
     controllerProp = PropietaireControllers(db)
-    return  controllerProp.CreateProprietaire(currentUser , DataCreate , files)
+    return  controllerProp.CreateProprietaire(currentUser , DataCreate)
 
 @EntrepriseRoute.post("/uploder/images/{id}")
 async  def UploaderImages(

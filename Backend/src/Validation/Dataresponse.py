@@ -1,6 +1,7 @@
 from pydantic import  BaseModel
 from uuid import  UUID
 from decimal import  Decimal
+from typing import  Optional
 '''
     * Response Entreprise 
     * Response User 
@@ -8,6 +9,7 @@ from decimal import  Decimal
     
 '''
 
+#entreprise response
 class EntrepriseResponse(BaseModel) :
     id :int
     Nom : str
@@ -17,7 +19,7 @@ class EntrepriseResponse(BaseModel) :
     class Config :
         orm_mode = True
 
-
+# proprietaire Response
 class ProprietaireResponse(BaseModel) :
     id :UUID
     titre : str
@@ -30,5 +32,16 @@ class ProprietaireResponse(BaseModel) :
     prix : Decimal
     description : str
     entreprise_id : int
+
+
+# Response User
+class UserResponse(BaseModel) :
+    id : UUID
+    Nom : str
+    email : str
+    teliphone :Optional[str] = None
+
+    class Config :
+        orm_mode = True
 
 

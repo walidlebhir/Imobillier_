@@ -10,7 +10,7 @@ export const AuthStore = create((set)=>({
     user : auth , 
 
     Login : async(email , password )=>{
-
+        
     }, 
 
     Register : async(userName , email , password )=>{

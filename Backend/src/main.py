@@ -5,6 +5,8 @@ from src.Routes.TestApp import AppRoutes
 from src.Config.DB import Base , engine
 from src.Routes.AuthRoute import AuthenticationRoute
 from src.Routes.AdminRoute import EntrepriseRoute
+from src.Routes.ClientRoutes import ClientRoutes
+
 
 # importation des model Pour la creation 
 from src.Models.User import User
@@ -23,5 +25,6 @@ app = FastAPI()
 app.include_router(AppRoutes) 
 app.include_router(AuthenticationRoute)
 app.include_router(EntrepriseRoute)
+app.include_router(ClientRoutes)
 
 
