@@ -1,11 +1,17 @@
 import uuid
-from sqlalchemy import Column , Integer , String , DateTime , ForeignKey
+from sqlalchemy import Column , Integer , String , DateTime , ForeignKey , Enum as sqlenum
 from sqlalchemy.sql import func 
 from sqlalchemy.dialects.postgresql import UUID 
 
 from src.Config.DB import Base
 from sqlalchemy.orm import relationship 
+from enum import  Enum
 
+class StatusReservation(Enum) :
+    Valider = "accepter"
+    refuser = "refuser"
+    Encour = "encour"
+    Anuler = "anuler"
 
 class Reservation(Base) : 
     __tablename__ = "reservation" 
@@ -20,6 +26,9 @@ class Reservation(Base) :
     # relation proprtaire 
     id_proprietaire = Column(UUID(as_uuid=True) , ForeignKey("proprietaire.id") , unique=True)
     Propritaire = relationship("Proprietaire" , back_populates="reservation") 
+
+    # status Reservation
+    Statu = Column(sqlenum(StatusReservation) , nullable=False , default=StatusReservation.Encour)
 
     # date de reservation
     date_reservation = Column(DateTime(timezone=True) , nullable=False)

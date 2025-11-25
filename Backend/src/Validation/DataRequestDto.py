@@ -8,3 +8,6 @@ class RequestUpdatePassword(BaseModel) :
     PasswordActuel : str
     NewPassword : str
 
+
+
+# Request data Prediction :

@@ -12,26 +12,36 @@ import {
 import NavBarApp from '../Components/NavBarApp';
 import Footer from '../Components/Fotter';
 import { Link } from 'react-router-dom';
+import { UseAuthStore } from '../Store/AuthStore';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 export default function LoginPage() {
+
+  const Navigate = useNavigate() ; 
+
+  const {Login , isAuth } = UseAuthStore() ; 
+
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Logique de connexion
+    const Resulatat_login = Login(formData.email , formData.password); 
+    if(Resulatat_login){
+      toast.success("Bien venue votre espace "); 
+      
+      Navigate("/clien/hom"); 
+    }
   };
+
+  console.log(isAuth) 
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -69,7 +79,7 @@ export default function LoginPage() {
                         id="email"
                         name="email"
                         value={formData.email}
-                        onChange={handleChange}
+                        onChange={(e)=>setFormData({...formData , email:e.target.value})}
                         className="block w-full pl-10 pr-3 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                         placeholder="votre@email.com"
                         required
@@ -91,7 +101,7 @@ export default function LoginPage() {
                         id="password"
                         name="password"
                         value={formData.password}
-                        onChange={handleChange}
+                        onChange={(e)=>setFormData({...formData , password:e.target.value})}
                         className="block w-full pl-10 pr-10 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                         placeholder="Votre mot de passe"
                         required
@@ -131,6 +141,7 @@ export default function LoginPage() {
                   {/* Bouton de connexion */}
                   <button
                     type="submit"
+                    onClick={()=>handleSubmit()}
                     className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 font-semibold"
                   >
                     Se connecter

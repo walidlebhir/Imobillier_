@@ -1,6 +1,6 @@
 from dotenv import  load_dotenv
 from fastapi import FastAPI
-
+from fastapi.middleware.cors import CORSMiddleware
 from src.Routes.TestApp import AppRoutes
 from src.Config.DB import Base , engine
 from src.Routes.AuthRoute import AuthenticationRoute
@@ -21,7 +21,18 @@ load_dotenv()
 Base.metadata.create_all(bind=engine)
 
 
-app = FastAPI() 
+
+app = FastAPI()
+
+# Cree une midlware pour request react js
+app.add_middleware(
+    CORSMiddleware ,
+    allow_origins=["http://localhost:5173"],  # URL de React
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(AppRoutes) 
 app.include_router(AuthenticationRoute)
 app.include_router(EntrepriseRoute)

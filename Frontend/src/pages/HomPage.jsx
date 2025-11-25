@@ -47,43 +47,42 @@ export default function HomePage() {
       <NavBarApp />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white relative overflow-hidden pt-20">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
+      <section className="bg-white text-gray-900 relative overflow-hidden pt-20 border-b border-gray-200">
         <div className="container mx-auto px-6 py-24 relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-between">
             <div className="lg:w-1/2 mb-12 lg:mb-0">
-              <div className="inline-flex items-center bg-blue-800/30 border border-blue-400/30 rounded-full px-5 py-3 mb-8">
-                <CheckBadgeIcon className="w-5 h-5 text-green-400 mr-3" />
-                <span className="text-sm font-semibold">Plateforme IA révolutionnaire</span>
+              <div className="inline-flex items-center bg-blue-50 border border-blue-200 rounded-full px-5 py-3 mb-8">
+                <CheckBadgeIcon className="w-5 h-5 text-blue-600 mr-3" />
+                <span className="text-sm font-semibold text-blue-700">Plateforme IA révolutionnaire</span>
               </div>
-              <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-8">
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-8 text-gray-900">
                 Intelligence Immobilière
-                <span className="text-blue-400"> 2.0</span>
+                <span className="text-blue-600"> 2.0</span>
               </h1>
-              <p className="text-xl mb-8 text-blue-100 leading-relaxed">
+              <p className="text-xl mb-8 text-gray-600 leading-relaxed">
                 Connectez, communiquez et concluez avec notre suite d'outils IA 
                 dédiée aux professionnels de l'immobilier et leurs clients.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <button className="flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                <button className="flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 shadow-md hover:shadow-lg">
                   <RocketLaunchIcon className="w-5 h-5" />
                   <span>Démarrer l'essai gratuit</span>
                 </button>
-                <button className="flex items-center justify-center space-x-3 border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-blue-900 transition-all duration-300">
+                <button className="flex items-center justify-center space-x-3 border-2 border-gray-300 bg-white text-gray-700 px-8 py-4 rounded-lg font-semibold text-lg hover:border-blue-600 hover:text-blue-600 transition-all duration-300">
                   <PlayCircleIcon className="w-5 h-5" />
                   <span>Voir la démo</span>
                 </button>
               </div>
-              <div className="flex items-center text-sm text-blue-200">
+              <div className="flex items-center text-sm text-gray-500">
                 <div className="flex -space-x-2 mr-4">
-                  <div className="w-10 h-10 bg-blue-400 rounded-full border-2 border-slate-900 flex items-center justify-center">
-                    <BuildingOfficeIcon className="w-5 h-5 text-white" />
+                  <div className="w-10 h-10 bg-blue-100 rounded-full border-2 border-white flex items-center justify-center">
+                    <BuildingOfficeIcon className="w-5 h-5 text-blue-600" />
                   </div>
-                  <div className="w-10 h-10 bg-green-400 rounded-full border-2 border-slate-900 flex items-center justify-center">
-                    <HomeModernIcon className="w-5 h-5 text-white" />
+                  <div className="w-10 h-10 bg-green-100 rounded-full border-2 border-white flex items-center justify-center">
+                    <HomeModernIcon className="w-5 h-5 text-green-600" />
                   </div>
-                  <div className="w-10 h-10 bg-purple-400 rounded-full border-2 border-slate-900 flex items-center justify-center">
-                    <ShieldCheckIcon className="w-5 h-5 text-white" />
+                  <div className="w-10 h-10 bg-purple-100 rounded-full border-2 border-white flex items-center justify-center">
+                    <ShieldCheckIcon className="w-5 h-5 text-purple-600" />
                   </div>
                 </div>
                 <span className="font-medium">Rejoignez 500+ agences qui nous font confiance</span>
@@ -91,7 +90,7 @@ export default function HomePage() {
             </div>
             <div className="lg:w-1/2">
               <div className="relative">
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-2xl">
+                <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-lg">
                   <img 
                     src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1073&q=80" 
                     alt="Dashboard IA immobilier"
@@ -99,14 +98,14 @@ export default function HomePage() {
                   />
                 </div>
                 {/* Floating AI Card */}
-                <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-5 shadow-2xl border border-gray-200">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                      <ChatBubbleLeftRightIcon className="w-6 h-6 text-green-600" />
+                <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-xl border border-gray-200">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
+                      <ChatBubbleLeftRightIcon className="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-800">Assistant IA</div>
-                      <div className="text-sm text-gray-600">Prédictions précises</div>
+                      <div className="font-semibold text-gray-800 text-sm">Assistant IA</div>
+                      <div className="text-xs text-gray-600">Prédictions précises</div>
                     </div>
                   </div>
                 </div>

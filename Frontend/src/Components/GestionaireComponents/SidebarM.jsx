@@ -1,9 +1,76 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-export default function SidebarM() {
+import { 
+  
+  FiPieChart, 
+  FiSettings, 
+  FiCalendar, 
+  FiHeart,
+  FiTrendingUp,
+ 
+    FiHome,
+  FiUsers
+} from 'react-icons/fi';
+
+
+export default function SidebareManger() {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [activeItem, setActiveItem] = useState('dashboard');
+
+  const menuItems = [
+    { id: 'dashboard', label: 'Tableau de bord', icon: <FiHome size={20} /> , path : "/dashbord/client" },
+    { id: 'Reservation', label: 'Reservation', icon: <FiCalendar size={20} /> , path:"/reservation"},
+    {id:'prediction' , label : 'Prediction' , icon :<FiTrendingUp size={20} /> , path:"/prediction" }, 
+    { id: 'Favorate', label: 'favorate', icon: <FiHeart size={20} /> , path:"/Raport"},
+  ];
+
   return (
-    <div>
+    <div className={`bg-white h-screen fixed left-0 top-0 flex flex-col transition-all duration-300
+      ${isCollapsed ? 'w-16' : 'w-64'} z-30 border-r border-gray-200`}>
+
+      {/* Header */}
       
+
+      {/* Navigation */}
+      <nav className="flex-1 py-8 px-2 mt-16 overflow-y-auto">
+        <ul className="space-y-1">
+          {menuItems.map(item => (
+  <li key={item.id}>
+    <Link
+      to={item.path}
+      className={`w-full flex items-center rounded-lg p-2 transition-colors
+        ${activeItem === item.id
+          ? 'bg-blue-50 text-blue-600'
+          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}`}
+      onClick={() => setActiveItem(item.id)}
+    >
+      <span className={`flex-shrink-0 ${activeItem === item.id ? 'text-blue-600' : 'text-gray-500'}`}>
+        {item.icon}
+      </span>
+      {!isCollapsed && (
+        <span className="ml-3 flex-1 text-left font-medium">
+          {item.label}
+        </span>
+      )}
+    </Link>
+  </li>
+))}
+        </ul>
+      </nav>
+
+      {/* Footer: Paramètres et Déconnexion */}
+      <div className="p-4 border-t border-gray-200 mt-auto space-y-2">
+        <Link to="/Setting">
+          <button className="w-full flex items-center rounded-lg p-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+            <FiSettings size={20} className="flex-shrink-0" />
+            {!isCollapsed && <span className="ml-3 flex-1 text-left font-medium">Paramètres</span>}
+          </button>
+        </Link>
+        
+        
+       
+      </div>
     </div>
-  )
+  );
 }

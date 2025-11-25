@@ -13,8 +13,13 @@ import {
 import NavBarApp from '../Components/NavBarApp';
 import Footer from '../Components/Fotter';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { UseAuthStore } from '../Store/AuthStore';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterPage() {
+
+  const Navigate = useNavigate() ; 
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -22,17 +27,20 @@ export default function RegisterPage() {
     password: ''
   });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const {user , token  , Register} = UseAuthStore() ; 
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Logique d'inscription
+    Role = "client" ; 
+    const Resultat = Register(formData.name , formData.email , formData.password , Role) ; 
+    if(Resultat){
+        toast.success("Bien venue dans notres service ")
+        Navigate("/clien/hom")
+        console.log(token) 
+    }else{
+      Navigate("/Register/page"); 
+    }
   };
 
   return (
@@ -76,7 +84,7 @@ export default function RegisterPage() {
                         id="name"
                         name="name"
                         value={formData.name}
-                        onChange={handleChange}
+                        onChange={(e)=>setFormData({...formData , name:e.target.value})}
                         className="block w-full pl-10 pr-3 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                         placeholder="Votre nom complet"
                         required
@@ -98,7 +106,7 @@ export default function RegisterPage() {
                         id="email"
                         name="email"
                         value={formData.email}
-                        onChange={handleChange}
+                        onChange={(e)=>setFormData({...formData , email:e.target.value})}
                         className="block w-full pl-10 pr-3 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                         placeholder="votre@email.com"
                         required
@@ -120,7 +128,7 @@ export default function RegisterPage() {
                         id="password"
                         name="password"
                         value={formData.password}
-                        onChange={handleChange}
+                        onChange={(e)=>setFormData({...formData , password : e.target.value})}
                         className="block w-full pl-10 pr-10 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                         placeholder="Créez un mot de passe"
                         required
@@ -164,6 +172,7 @@ export default function RegisterPage() {
                   <button
                     type="submit"
                     className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 font-semibold"
+                    onClick={()=>handleSubmit()}
                   >
                     Créer mon compte
                   </button>

@@ -1,345 +1,303 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import NavBarApp from '../Components/NavBarApp';
 import { 
-  BuildingOfficeIcon,
   EyeIcon,
   EyeSlashIcon,
-  CheckCircleIcon,
-  XCircleIcon,
-  ArrowLeftIcon,
-  ShieldCheckIcon,
-  UserIcon,
+  BuildingOfficeIcon,
   EnvelopeIcon,
   PhoneIcon,
-  LockClosedIcon
+  LockClosedIcon,
+  CheckBadgeIcon,
+  ChartBarIcon,
+  UserGroupIcon,
+  RocketLaunchIcon
 } from '@heroicons/react/24/outline';
-
+import NavBarApp from '../Components/NavBarApp';
 import Footer from '../Components/Fotter';
+import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { UseAuthStore } from '../Store/AuthStore';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function RegisterEnt() {
+  const Navigate = useNavigate(); 
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    companyName: '',
+    name: '',
     email: '',
     phone: '',
-    password: '',
-    confirmPassword: '',
-    acceptTerms: false
+    password: ''
   });
-  
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [passwordStrength, setPasswordStrength] = useState(0);
 
-  const passwordRequirements = [
-    { id: 1, text: 'Au moins 8 caractères', met: false },
-    { id: 2, text: 'Une majuscule', met: false },
-    { id: 3, text: 'Un chiffre', met: false },
-    { id: 4, text: 'Un caractère spécial', met: false }
-  ];
-
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-
-    if (name === 'password') {
-      checkPasswordStrength(value);
-    }
-  };
-
-  const checkPasswordStrength = (password) => {
-    let strength = 0;
-    const requirements = [
-      password.length >= 8,
-      /[A-Z]/.test(password),
-      /[0-9]/.test(password),
-      /[!@#$%^&*(),.?":{}|<>]/.test(password)
-    ];
-    
-    strength = requirements.filter(Boolean).length;
-    setPasswordStrength(strength);
-  };
-
-  const getPasswordStrengthColor = () => {
-    switch (passwordStrength) {
-      case 1: return 'bg-red-500';
-      case 2: return 'bg-orange-500';
-      case 3: return 'bg-yellow-500';
-      case 4: return 'bg-green-500';
-      default: return 'bg-gray-200';
-    }
-  };
-
-  const getPasswordStrengthText = () => {
-    switch (passwordStrength) {
-      case 1: return 'Faible';
-      case 2: return 'Moyen';
-      case 3: return 'Bon';
-      case 4: return 'Fort';
-      default: return '';
-    }
-  };
+  const { Register } = UseAuthStore(); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Logique d'inscription ici
-    console.log('Données du formulaire:', formData);
+    
+    try {
+      Role = "gestionaire"
+      resulatat = Register(formData.name , formData.email , formData.password , Role ) ; 
+      if(resulatat){
+        Navigate("/entreprise/dashbord"); 
+      }
+    } catch (error) {
+      console.log("Prblemme dans la fonction register ",error) ; 
+    }
   };
 
+  
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-       
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        
-        {/* Header */}
-        <div className="text-center">
-          <Link to="/" className="inline-flex items-center justify-center mb-8">
-            <BuildingOfficeIcon className="h-12 w-12 text-blue-600" />
-            <span className="ml-3 text-2xl font-bold text-gray-900">ImmoFinder</span>
-          </Link>
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">
-            Créer un compte entreprise
-          </h2>
-          <p className="text-gray-600 mb-8">
-            Rejoignez notre plateforme et transformez votre activité immobilière
-          </p>
-        </div>
-
-        {/* Form Card */}
-        <div className="bg-white py-8 px-6 shadow-xl rounded-2xl sm:px-10 border border-gray-100">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            {/* Company Name */}
-            <div>
-              <label htmlFor="companyName" className="block text-sm font-semibold text-gray-700 mb-2">
-                Nom de l'entreprise *
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <BuildingOfficeIcon className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="companyName"
-                  name="companyName"
-                  type="text"
-                  required
-                  value={formData.companyName}
-                  onChange={handleInputChange}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                  placeholder="Votre entreprise"
-                />
-              </div>
-            </div>
-
-            {/* Email */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                Email professionnel *
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <EnvelopeIcon className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                  placeholder="contact@entreprise.com"
-                />
-              </div>
-            </div>
-
-            {/* Phone */}
-            <div>
-              <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                Téléphone *
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <PhoneIcon className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  required
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                  placeholder="+33 1 23 45 67 89"
-                />
-              </div>
-            </div>
-
-            {/* Password */}
-            <div>
-              <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
-                Mot de passe *
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <LockClosedIcon className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  required
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                  placeholder="Créez un mot de passe sécurisé"
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeSlashIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
-                  ) : (
-                    <EyeIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
-                  )}
-                </button>
-              </div>
-
-              {/* Password Strength */}
-              {formData.password && (
-                <div className="mt-3">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm text-gray-600">Force du mot de passe</span>
-                    <span className={`text-sm font-medium ${
-                      passwordStrength === 1 ? 'text-red-600' :
-                      passwordStrength === 2 ? 'text-orange-600' :
-                      passwordStrength === 3 ? 'text-yellow-600' :
-                      passwordStrength === 4 ? 'text-green-600' : 'text-gray-600'
-                    }`}>
-                      {getPasswordStrengthText()}
-                    </span>
+    <div className="min-h-screen bg-white">
+      <NavBarApp />
+      
+      {/* Main Content */}
+      <div className="pt-20 pb-16 mt-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-start">
+            
+            {/* Formulaire à gauche - 50% */}
+            <div className="w-full lg:w-1/2 lg:pr-12">
+              <div className="max-w-md mx-auto lg:mx-0">
+                {/* En-tête du formulaire */}
+                <div className="mb-8">
+                  <div className="flex items-center mb-4">
+                    <BuildingOfficeIcon className="h-8 w-8 text-blue-600 mr-3" />
+                    <h1 className="text-3xl font-bold text-gray-900">
+                      Inscription Entreprise
+                    </h1>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
-                      className={`h-2 rounded-full transition-all duration-300 ${getPasswordStrengthColor()}`}
-                      style={{ width: `${(passwordStrength / 4) * 100}%` }}
-                    ></div>
+                  <p className="text-gray-600">
+                    Créez votre compte entreprise et développez votre activité immobilière
+                  </p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Nom de l'entreprise */}
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      Nom de l'entreprise *
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <BuildingOfficeIcon className="h-5 w-5 text-gray-400" />
+                      </div>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={(e)=>setFormData({...formData , name:e.target.value})}
+                        className="block w-full pl-10 pr-3 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                        placeholder="Nom de votre entreprise"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  {/* Email */}
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      Email professionnel *
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <EnvelopeIcon className="h-5 w-5 text-gray-400" />
+                      </div>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={(e)=>setFormData({...formData , email :e.target.value})} 
+                        className="block w-full pl-10 pr-3 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                        placeholder="contact@entreprise.com"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  {/* Téléphone */}
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                      Téléphone *
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <PhoneIcon className="h-5 w-5 text-gray-400" />
+                      </div>
+                      <input
+                        type="text"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={(e)=>formData({
+                          ...formData , 
+                          phone : e.target.value 
+                        })}
+                        className="block w-full pl-10 pr-3 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                        placeholder="+33 1 23 45 67 89"
+                        
+                      />
+                    </div>
+                  </div>
+
+                  {/* Mot de passe */}
+                  <div>
+                    <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                      Mot de passe *
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <LockClosedIcon className="h-5 w-5 text-gray-400" />
+                      </div>
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        id="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={(e)=>setFormData({
+                          ...formData , 
+                          password : e.target.value 
+                        })}
+                        className="block w-full pl-10 pr-10 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                        placeholder="Créez un mot de passe"
+                        required
+                      />
+                      <button
+                        type="button"
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? (
+                          <EyeSlashIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                        ) : (
+                          <EyeIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Checkbox Conditions */}
+                  <div className="flex items-start space-x-3">
+                    <input
+                      id="terms"
+                      name="terms"
+                      type="checkbox"
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-1"
+                      required
+                    />
+                    <label htmlFor="terms" className="text-sm text-gray-600">
+                      J'accepte les{' '}
+                      <a href="#" className="text-blue-600 hover:text-blue-500 font-medium">
+                        conditions d'utilisation
+                      </a>{' '}
+                      et la{' '}
+                      <a href="#" className="text-blue-600 hover:text-blue-500 font-medium">
+                        politique de confidentialité
+                      </a>
+                    </label>
+                  </div>
+
+                  {/* Bouton d'inscription */}
+                  <button
+
+                    type="submit"
+                    onClick={()=>handleSubmit()}
+                    className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 font-semibold"
+                  >
+                    Créer mon compte entreprise
+                  </button>
+
+                  {/* Lien de connexion */}
+                  <div className="text-center pt-4">
+                    <p className="text-gray-600">
+                      Déjà un compte ?{' '}
+                      <Link to="/login" className="text-blue-600 hover:text-blue-500 font-semibold">
+                        Se connecter
+                      </Link>
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            {/* Image à droite - 50% */}
+            <div className="hidden lg:block w-1/2">
+              <div className="relative h-full min-h-[600px] rounded-2xl overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  alt="Professional real estate business"
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Overlay avec contenu */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
+                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <div className="mb-8">
+                      <h2 className="text-2xl font-bold mb-4">
+                        Développez votre entreprise immobilière
+                      </h2>
+                      <p className="text-gray-200 text-lg">
+                        Rejoignez la première plateforme qui connecte les professionnels de l'immobilier
+                      </p>
+                    </div>
+
+                    {/* Avantages */}
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                          <ChartBarIcon className="h-4 w-4 text-white" />
+                        </div>
+                        <span className="font-medium">Analyses de marché avancées</span>
+                      </div>
+                      
+                      <div className="flex items-center space-x-3">
+                        <div className="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                          <UserGroupIcon className="h-4 w-4 text-white" />
+                        </div>
+                        <span className="font-medium">Portée client étendue</span>
+                      </div>
+                      
+                      <div className="flex items-center space-x-3">
+                        <div className="flex-shrink-0 w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                          <RocketLaunchIcon className="h-4 w-4 text-white" />
+                        </div>
+                        <span className="font-medium">Outils de gestion optimisés</span>
+                      </div>
+
+                      <div className="flex items-center space-x-3">
+                        <div className="flex-shrink-0 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                          <CheckBadgeIcon className="h-4 w-4 text-white" />
+                        </div>
+                        <span className="font-medium">Certification professionnelle</span>
+                      </div>
+                    </div>
+
+                    {/* Stats */}
+                    <div className="grid grid-cols-3 gap-6 mt-8 pt-6 border-t border-white/20">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold">500+</div>
+                        <div className="text-gray-300 text-sm">Entreprises</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold">10K+</div>
+                        <div className="text-gray-300 text-sm">Transactions/mois</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold">95%</div>
+                        <div className="text-gray-300 text-sm">Satisfaction</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              )}
-            </div>
-
-            {/* Confirm Password */}
-            <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-700 mb-2">
-                Confirmer le mot de passe *
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <LockClosedIcon className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type={showConfirmPassword ? "text" : "password"}
-                  required
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                  className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                  placeholder="Confirmez votre mot de passe"
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                >
-                  {showConfirmPassword ? (
-                    <EyeSlashIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
-                  ) : (
-                    <EyeIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
-                  )}
-                </button>
               </div>
             </div>
-
-            {/* Terms and Conditions */}
-            <div className="flex items-start space-x-3">
-              <div className="flex items-center h-5">
-                <input
-                  id="acceptTerms"
-                  name="acceptTerms"
-                  type="checkbox"
-                  required
-                  checked={formData.acceptTerms}
-                  onChange={handleInputChange}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-              </div>
-              <div className="text-sm">
-                <label htmlFor="acceptTerms" className="font-medium text-gray-700">
-                  J'accepte les{' '}
-                  <a href="#" className="text-blue-600 hover:text-blue-500">
-                    conditions d'utilisation
-                  </a>{' '}
-                  et la{' '}
-                  <a href="#" className="text-blue-600 hover:text-blue-500">
-                    politique de confidentialité
-                  </a>
-                </label>
-              </div>
-            </div>
-
-            {/* Submit Button */}
-            <div>
-              <button
-                type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 transform hover:scale-105"
-              >
-                Créer mon compte entreprise
-              </button>
-            </div>
-
-            {/* Security Note */}
-            <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
-              <ShieldCheckIcon className="h-4 w-4 text-green-500" />
-              <span>Vos données sont sécurisées et cryptées</span>
-            </div>
-          </form>
-
-          {/* Login Link */}
-          <div className="mt-8 text-center">
-            <p className="text-sm text-gray-600">
-              Vous avez déjà un compte ?{' '}
-              <Link to="/login/page" className="font-semibold text-blue-600 hover:text-blue-500">
-                Se connecter
-              </Link>
-            </p>
-          </div>
-        </div>
-
-        {/* Features */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-          <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-            <BuildingOfficeIcon className="h-6 w-6 text-blue-600 mx-auto mb-2" />
-            <h3 className="text-sm font-semibold text-gray-900">Gestion complète</h3>
-            <p className="text-xs text-gray-600">Tous vos biens en un seul endroit</p>
-          </div>
-          <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-            <UserIcon className="h-6 w-6 text-green-600 mx-auto mb-2" />
-            <h3 className="text-sm font-semibold text-gray-900">Clients qualifiés</h3>
-            <p className="text-xs text-gray-600">Lead scoring intelligent</p>
-          </div>
-          <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-            <ShieldCheckIcon className="h-6 w-6 text-purple-600 mx-auto mb-2" />
-            <h3 className="text-sm font-semibold text-gray-900">Sécurité maximale</h3>
-            <p className="text-xs text-gray-600">Données cryptées</p>
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

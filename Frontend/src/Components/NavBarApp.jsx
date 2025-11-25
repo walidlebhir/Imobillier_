@@ -145,13 +145,13 @@ export default function NavBarApp() {
           <div className="hidden lg:flex items-center space-x-4">
             <Link to="/login/page">
               <button className="flex items-center gap-2 px-6 py-3 text-sm font-semibold text-gray-700 hover:text-blue-600 transition-all duration-200 rounded-xl hover:bg-gray-50">
-                <UserIcon className="h-6 w-6 text-gray-700" /> Login
+                <UserIcon className="h-5 w-5 text-gray-700" /> Login
               </button>
             </Link>
 
             <Link to="/register/page">
               <button className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white text-sm font-semibold rounded-xl hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105">
-                <UserPlusIcon className="h-6 w-6 text-white" />
+                <UserPlusIcon className="h-5 w-5 text-white" />
                 Signup
               </button>
             </Link>

@@ -69,6 +69,14 @@ async  def ReservationFunction(coment : str ,
     transaction =Transactioncontoller(db)
     return  transaction.ReservationRendezVous(id , coment , currentUser)
 
+@ClientRoutes.post("/anuler/reservation")
+async  def AnulerReservation() :
+    pass
+
+@ClientRoutes.get("/get/Reservation")
+async  def getReservationClient() :
+    pass
+
 
 #  prediction ai machine learning
 @ClientRoutes.post("/prediction/pro")
