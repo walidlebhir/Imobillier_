@@ -16,6 +16,9 @@ import DashbordPage from "./pages/Clients/DashbordPage"
 import ReservationClient from "./pages/Clients/ReservationClient"
 import Layout from "./Components/GestionaireComponents/Layout"
 import Dashbord from "./pages/Gestionaire/Dashbord"
+import CreateEntreprise from "./pages/Gestionaire/CreateEntreprise"
+import Propritaire from "./pages/Gestionaire/Propritaire"
+import ReservationPage from "./pages/Gestionaire/ReservationPage"
 
 function App() {
 
@@ -72,9 +75,12 @@ function App() {
 
 
         {/**Dashbord Pour Gestioneur  */} 
-        <Route element={<Layout />} >
+        <Route element={isAuth ? <Layout /> : <LoginPage /> } >
+          <Route path="/create/Entreprise" element={<CreateEntreprise />} /> 
           <Route path="/entreprise/dashbord" element = {<Dashbord />} />
-
+          <Route path="/propritaire"  element={<Propritaire />} />
+          <Route path="/reservation/entreprise" element = {<ReservationPage />} /> 
+          
         </Route>
 
 

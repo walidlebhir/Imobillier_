@@ -14,7 +14,7 @@ from src.Models.User import User
 from src.Validation.GestionaireDto import ProprietaireRequest
 from src.Validation.Dataresponse import ProprietaireResponse
 
-import  json
+
 from typing import List
 
 
@@ -44,7 +44,7 @@ async def getEntreprise(db:Session = Depends(get_db) , current_user = Depends(re
 
 #--> proprietaire routes
 
-@EntrepriseRoute.post("/create/newProprietaire" )
+@EntrepriseRoute.post("/create/newProprietaire")
 async  def CreateNewPro( DataCreate : ProprietaireRequest,
                         db : Session = Depends(get_db) ,
                         currentUser : User = Depends(require_role(RoleUser.GESTIONAIRE)) ,
@@ -65,9 +65,9 @@ async  def UploaderImages(
 
 
 @EntrepriseRoute.get("/get/Proprietaire" , response_model=List[ProprietaireResponse])
-async def getProprietaire(db :Session = Depends(get_db)) :
+async def getProprietaire(db :Session = Depends(get_db) , curentUser : User = Depends(require_role(RoleUser.GESTIONAIRE)))  :
     controllerPro = PropietaireControllers(db)
-    return  controllerPro.ShowALL();
+    return  controllerPro.ShowALL(curentUser)
 
 @EntrepriseRoute.get("/get/onepropritaire/{id}" , response_model=ProprietaireResponse)
 async def geOnePropritaire(id : int , db : Session = Depends(get_db)) :
@@ -76,8 +76,28 @@ async def geOnePropritaire(id : int , db : Session = Depends(get_db)) :
 
 
 @EntrepriseRoute.delete("/delete/proprietaire/{id}")
-async def DeleteProprietaire(id : int ) :
-    pass
+async def DeleteProprietaire(id : UUID , db :Session = Depends(get_db)) :
+    controllerPro = PropietaireControllers(db) 
+    return controllerPro.deletePro(id)
+
+
+# --> Routes  pour prediction et classification 
+@EntrepriseRoute.post("/prediction") 
+async def predictionPrice() : 
+    pass 
+
+@EntrepriseRoute.post("/serach/sementique") 
+async def Search_sementique() : 
+    pass 
+
+# --> creation d'une chatBoot pour reponde au question apartir de recherche semantique 
+@EntrepriseRoute.post("/chatBott") 
+async def chatBoot_Rag() : 
+    pass 
+
+
+
+# --> gestion des Reservation 
 
 
 

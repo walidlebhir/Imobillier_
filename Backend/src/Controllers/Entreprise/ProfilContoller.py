@@ -13,8 +13,7 @@ class ProfilController :
         return {
             "data" : userConcter
         }
-
-
+    
     def changePassword(self):
         pass
 

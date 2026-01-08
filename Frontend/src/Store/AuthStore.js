@@ -10,7 +10,10 @@ export const UseAuthStore = create((set)=>({
     isAuth : false , 
     user : null , 
     token : null , 
+    role : null , 
     loading  : true , 
+
+
     Login : async(email , password )=>{
         
         // creation logique login : 
@@ -20,11 +23,11 @@ export const UseAuthStore = create((set)=>({
                 password : password 
             })
             // stockage Token 
-            set({token : res.data.token , isAuth:true , loading:false}) 
+            set({token : res.data.token , isAuth:true , loading:false , role : res.data.role}) 
             localStorage.setItem("token" , res.data.token); 
             console.log(res.data.token) ; 
-
-            return true ; 
+            console.log(res.data.role) ; 
+            return res.data.role ; 
 
         } catch (error) {
             // dbeug 
@@ -71,6 +74,10 @@ export const UseAuthStore = create((set)=>({
         } catch (error) {
             // debug
             console.log(error.response?.data?.detail) ; 
+
+            // IMPORTANT !!!
+            set({ isAuth: false, loading: false });
+            localStorage.removeItem("token");
             toast.error(error.response?.data?.detail || "Problemme incorect ")
         }
     }, 
@@ -80,13 +87,12 @@ export const UseAuthStore = create((set)=>({
         // l'orsqeu on fait clque supremet le token 
         try {
             localStorage.removeItem("token") 
-            
+            console.log("logout est efectue ")
             return true ; 
-
-            
         } catch (error) {
             // debug 
-            console.log("Problemme "+error); 
+            console.log("Problemme "+error);
+            return false ;  
         }
     }
 }))

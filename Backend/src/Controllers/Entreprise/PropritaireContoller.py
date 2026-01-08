@@ -43,8 +43,8 @@ class PropietaireControllers :
 
             # crate data
             self.database.add(NewPro)
-            self.commit()
-            self.refresh(NewPro)
+            self.database.commit()
+            self.database.refresh(NewPro)
 
             return  JSONResponse(
                 status_code=status.HTTP_201_CREATED ,
@@ -88,17 +88,31 @@ class PropietaireControllers :
 
 
 
-    def ShowALL(self):
+    def ShowALL(self , userConecter : User): 
         # Recuperation des donnes
+        # recuperation proprietaire ca depend idManager 
+        # --> Recuperation id user 
+        # --> Recuperation id entreprise 
+        
         try:
-            DataProp = self.database.query(Proprietaire).all()
+            print(userConecter.id)
+            # Recuperation id ENtreprise 
+            EntrepriseData = self.database.query(Entreprise).filter(Entreprise.gestionaireId == userConecter.id).first() 
+
+            if EntrepriseData is None : 
+                raise HTTPException(
+                    status_code=401 , 
+                    detail="Entreprise ne trouve pas "
+                )
+            
+            DataProp = self.database.query(Proprietaire).filter(Proprietaire.entreprise_id == EntrepriseData.id).all() 
             return  DataProp
         except Exception as e :
             # debug
             print(f"Problemme dans le systme {e}")
             raise HTTPException(
                 status_code=501 ,
-                detail=f"Problemme dans le server "
+                detail=f"Problemme dans le server {e} "
             )
 
     def ShowOne(self , id :int ):
@@ -116,10 +130,24 @@ class PropietaireControllers :
         pass
 
 
-    def delete(self):
+    def deletePro(self , id : UUID):
         # supresion
         try:
-            pass
+            # code busness pour la supresion d'une propritaire 
+            propritairedeleted =self.database.query(Proprietaire).filter(Proprietaire.id == id).first() 
+            if not propritairedeleted : 
+                raise HTTPException(
+                    status_code=401 , 
+                    detail="propritaire n'existe pas "
+                )
+
+            self.database.delete(propritairedeleted) 
+            self.database.commit() 
+
+            return {
+                "message" : "propritaire est suprimer avce succes "
+            }
+
         except Exception as erreur :
             print(f"Problemme dans le server {erreur}")
             raise HTTPException(

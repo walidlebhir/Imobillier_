@@ -28,7 +28,7 @@ class Reservation(Base) :
     Propritaire = relationship("Proprietaire" , back_populates="reservation") 
 
     # status Reservation
-    Statu = Column(sqlenum(StatusReservation) , nullable=False , default=StatusReservation.Encour)
+    status = Column(sqlenum(StatusReservation) , nullable=False , default=StatusReservation.Encour)
 
     # date de reservation
     date_reservation = Column(DateTime(timezone=True) , nullable=False)
@@ -36,3 +36,4 @@ class Reservation(Base) :
     # date de creation et de modefication automatique 
     CreateAt = Column (DateTime(timezone=True) , server_default= func.now()) 
     UpdateAt =Column (DateTime(timezone=True),onupdate=func.now() , server_default=func.now() )
+

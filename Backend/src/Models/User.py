@@ -25,6 +25,9 @@ class User(Base):
     teliphone = Column(String)
     Role = Column(sqlEnum(RoleUser), nullable=False, default=RoleUser.CLIENT)
 
+    # Relation avec Predictiondata (un utilisateur peut avoir plusieurs prédictions)
+    predictions = relationship("Predictiondata", back_populates="gestionnaire")
+
     # Relation avec entreprise (One-to-One)
     entreprise = relationship("Entreprise", back_populates="gestionnaire", uselist=False)
 

@@ -8,22 +8,52 @@ import {
   FiCalendar, 
   FiHeart,
   FiTrendingUp,
- 
+
     FiHome,
   FiUsers
 } from 'react-icons/fi';
 
+import { KeyRound } from "lucide-react";
 
 export default function SidebareManger() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [activeItem, setActiveItem] = useState('dashboard');
 
   const menuItems = [
-    { id: 'dashboard', label: 'Tableau de bord', icon: <FiHome size={20} /> , path : "/dashbord/client" },
-    { id: 'Reservation', label: 'Reservation', icon: <FiCalendar size={20} /> , path:"/reservation"},
-    {id:'prediction' , label : 'Prediction' , icon :<FiTrendingUp size={20} /> , path:"/prediction" }, 
-    { id: 'Favorate', label: 'favorate', icon: <FiHeart size={20} /> , path:"/Raport"},
-  ];
+  { 
+    id: 'dashboard', 
+    label: 'Dashboard', 
+    icon: <FiHome size={20} />, 
+    path: "/entreprise/dashbord" 
+  },
+  { 
+    id: 'Proprietaire', 
+    label: 'propritaire', 
+    icon: <KeyRound size={20} />, 
+    path: "/propritaire" 
+  },
+
+  { 
+    id: 'reservation', 
+    label: 'Reservation', 
+    icon: <FiCalendar size={20} />, 
+    path: "/reservation/entreprise" 
+  },
+
+  { 
+    id: 'prediction', 
+    label: 'AI Prediction', 
+    icon: <FiTrendingUp size={20} />, 
+    path: "/ai/prediction" 
+  },
+
+  { 
+    id: 'planning', 
+    label: 'Planning', 
+    icon: <FiHeart size={20} />, 
+    path: "/planning" 
+  },
+];
 
   return (
     <div className={`bg-white h-screen fixed left-0 top-0 flex flex-col transition-all duration-300

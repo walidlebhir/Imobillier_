@@ -6,7 +6,7 @@ from src.Config.DB import Base , engine
 from src.Routes.AuthRoute import AuthenticationRoute
 from src.Routes.AdminRoute import EntrepriseRoute
 from src.Routes.ClientRoutes import ClientRoutes
-
+from src.Routes.AiRoute import aiRoutes
 
 # importation des model Pour la creation 
 from src.Models.User import User
@@ -27,7 +27,8 @@ app = FastAPI()
 # Cree une midlware pour request react js
 app.add_middleware(
     CORSMiddleware ,
-    allow_origins=["http://localhost:5173"],  # URL de React
+    allow_origins=[ "http://localhost:5173",
+        "http://127.0.0.1:5173"],  # URL de React
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -37,5 +38,5 @@ app.include_router(AppRoutes)
 app.include_router(AuthenticationRoute)
 app.include_router(EntrepriseRoute)
 app.include_router(ClientRoutes)
-
+app.include_router(aiRoutes)
 

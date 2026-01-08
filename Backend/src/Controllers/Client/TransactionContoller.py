@@ -59,20 +59,20 @@ class Transactioncontoller :
             )
 
     def ReservationRendezVous(self , id : UUID , comment:str , UserConecter:User):
-         try:
-             NewReservation =  Reservation(
-                 id_client = UserConecter.id ,
-                 Commantaire=comment ,
-                 id_proprietaire = id
-             )
-             self.Database.add(NewReservation)
-             self.Database.commit()
-             self.refresh(NewReservation)
-             return  Response(
-                 status_code=status.HTTP_201_CREATED ,
-                 content=f"Reservation ajouter avec succes {NewReservation.id} id reservation "
-             )
-         except Exception as e :
+        try:
+            NewReservation =  Reservation(
+            id_client = UserConecter.id ,
+            Commantaire=comment ,
+            id_proprietaire = id
+            )
+            self.Database.add(NewReservation)
+            self.Database.commit()
+            self.refresh(NewReservation)
+            return  Response(
+                status_code=status.HTTP_201_CREATED ,
+                content=f"Reservation ajouter avec succes {NewReservation.id} id reservation "
+            )
+        except Exception as e :
             # debug
             print(f"Problemme dans le server {e}")
             raise  HTTPException(

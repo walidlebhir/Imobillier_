@@ -20,18 +20,20 @@ def verificat_password(OriginPassword , hashPassword ) :
 # authentication 
 
 
-def Authentication(db : Session ,  username : str , password : str ) :
-    # recuperation des donnes 
-    try : 
-        user_auth = db.query(User).filter(User.email == username).first() 
-    except Exception as e : 
-        # debug 
-        print(f"problemme dans le server {e}")
+def Authentication(db: Session, username: str, password: str):
+    # ✅ initialisation obligatoire
+    user_auth = None
 
-    if not user_auth : 
-        return None 
-    if not verificat_password(password , user_auth.password) : 
-        return None 
+    try:
+        user_auth = db.query(User).filter(User.email == username).first()
+    except Exception as e:
+        print(f"Problème serveur (auth): {e}")
+        return None   # ✅ on sort immédiatement
 
-    return user_auth 
-    
+    if not user_auth:
+        return None
+
+    if not verificat_password(password, user_auth.password):
+        return None
+
+    return user_auth

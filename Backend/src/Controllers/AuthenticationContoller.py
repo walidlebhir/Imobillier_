@@ -41,7 +41,8 @@ class AuthController :
             
             return {
                 "token" : token , 
-                
+                "role" : NewUser.Role, 
+                "name" : NewUser.Nom 
             }
 
         except Exception as E : 
@@ -61,8 +62,9 @@ class AuthController :
                 detail="Login or password incorect "
             )
         
-        token = create_access_token({"sub" : userAuth.email , "role" : userAuth.password})
+        token = create_access_token({"sub" : userAuth.email , "role" : userAuth.Role})
         return {
-            "token" : token
+            "token" : token , 
+            "role" : userAuth.Role 
         }
         

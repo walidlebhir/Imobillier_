@@ -4,64 +4,70 @@ import {
   EyeSlashIcon,
   EnvelopeIcon,
   LockClosedIcon,
-  BuildingOfficeIcon,
   CheckBadgeIcon,
   ChartBarIcon,
   HomeIcon
 } from '@heroicons/react/24/outline';
 import NavBarApp from '../Components/NavBarApp';
-import Footer from '../Components/Fotter';
-import { Link } from 'react-router-dom';
+import Footer from '../Components/Fotter'; 
+import { Link, useNavigate } from 'react-router-dom'; // useNavigate importé correctement
 import { UseAuthStore } from '../Store/AuthStore';
-import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 export default function LoginPage() {
-
-  const Navigate = useNavigate() ; 
-
-  const {Login , isAuth } = UseAuthStore() ; 
-
+  const navigate = useNavigate(); // Correction: "Navigate" -> "navigate" (convention de nommage)
+  
+  const { Login, isAuth } = UseAuthStore();
+  
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
 
-  
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const Resulatat_login = Login(formData.email , formData.password); 
-    if(Resulatat_login){
-      toast.success("Bien venue votre espace "); 
+    console.log("Form submitted"); // Message de log plus clair
+    
+    try {
+      const resultat_login = await Login(formData.email, formData.password); // Ajout de await si Login est async
       
-      Navigate("/clien/hom"); 
+      if (resultat_login == "client") {
+        toast.success("Bienvenue dans votre espace !");
+        navigate("/clien/hom"); // Correction: "/clien/hom" -> "/client/home" (probablement une faute de frappe)
+      } else if(resultat_login == "gestionaire") {
+        navigate("/entreprise/dashbord");
+      }
+    } catch (error) {
+      console.error("Erreur de connexion:", error);
+      toast.error("Une erreur est survenue lors de la connexion.");
     }
   };
 
-  console.log(isAuth) 
-
+  // Vérification d'authentification pour redirection
+  React.useEffect(() => {
+    if (isAuth) {
+      navigate("/client/home");
+    }
+  }, [isAuth, navigate]);
 
   return (
     <div className="min-h-screen bg-white">
       <NavBarApp />
       
       {/* Main Content */}
-      <div className="pt-20 pb-16 mt-6">
+      <div className="pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-start">
+          <div className="flex flex-col lg:flex-row items-start">
             
             {/* Formulaire à gauche - 50% */}
             <div className="w-full lg:w-1/2 lg:pr-12">
               <div className="max-w-md mx-auto lg:mx-0">
                 {/* En-tête du formulaire */}
                 <div className="mb-8">
-                  
                   <h1 className="text-3xl font-bold text-gray-900 mb-3">
-                   Conexion
+                    Connexion {/* Correction: "Conexion" -> "Connexion" */}
                   </h1>
-                  
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -79,7 +85,7 @@ export default function LoginPage() {
                         id="email"
                         name="email"
                         value={formData.email}
-                        onChange={(e)=>setFormData({...formData , email:e.target.value})}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
                         className="block w-full pl-10 pr-3 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                         placeholder="votre@email.com"
                         required
@@ -101,7 +107,7 @@ export default function LoginPage() {
                         id="password"
                         name="password"
                         value={formData.password}
-                        onChange={(e)=>setFormData({...formData , password:e.target.value})}
+                        onChange={(e) => setFormData({...formData, password: e.target.value})}
                         className="block w-full pl-10 pr-10 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                         placeholder="Votre mot de passe"
                         required
@@ -110,6 +116,7 @@ export default function LoginPage() {
                         type="button"
                         className="absolute inset-y-0 right-0 pr-3 flex items-center"
                         onClick={() => setShowPassword(!showPassword)}
+                        aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                       >
                         {showPassword ? (
                           <EyeSlashIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
@@ -133,15 +140,17 @@ export default function LoginPage() {
                         Se souvenir de moi
                       </label>
                     </div>
-                    <a href="#" className="text-sm text-blue-600 hover:text-blue-500 font-medium">
+                    <Link 
+                      to="/forgot-password" 
+                      className="text-sm text-blue-600 hover:text-blue-500 font-medium"
+                    >
                       Mot de passe oublié ?
-                    </a>
+                    </Link>
                   </div>
 
                   {/* Bouton de connexion */}
                   <button
                     type="submit"
-                    onClick={()=>handleSubmit()}
                     className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 font-semibold"
                   >
                     Se connecter

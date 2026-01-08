@@ -31,14 +31,14 @@ export default function RegisterEnt() {
 
   const { Register } = UseAuthStore(); 
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
     
     try {
-      Role = "gestionaire"
-      resulatat = Register(formData.name , formData.email , formData.password , Role ) ; 
+      const Role = "gestionaire" ; 
+      const resulatat =await Register(formData.name , formData.email , formData.password , Role ) ; 
       if(resulatat){
-        Navigate("/entreprise/dashbord"); 
+        Navigate("/create/Entreprise"); 
       }
     } catch (error) {
       console.log("Prblemme dans la fonction register ",error) ; 
@@ -203,7 +203,7 @@ export default function RegisterEnt() {
                   <button
 
                     type="submit"
-                    onClick={()=>handleSubmit()}
+                    
                     className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 font-semibold"
                   >
                     Créer mon compte entreprise

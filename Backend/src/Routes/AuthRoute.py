@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from src.Config.DB import get_db
 from src.Models.User import  User , RoleUser
 from src.Security.Middlewares.ProtectRole import require_role
+from src.Security.Middlewares.ProtectConection import get_current_User
 from src.Validation.Dataresponse import UserResponse
 from src.Controllers.AuthenticationContoller import AuthController
 
@@ -27,7 +28,7 @@ async def Login(form_Data :LoginRequest  , db:Session = Depends(get_db) ) :
 
 # creation fonction chekAuth --> pour verifie la conexion user
 @AuthenticationRoute.get("/chek/auth" , response_model=UserResponse)
-async def ChekAuth(CurrentUser : User = Depends(require_role(RoleUser.CLIENT))) :
+async def ChekAuth(CurrentUser : User = Depends(get_current_User)) :
     try :
 
         return  CurrentUser

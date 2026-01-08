@@ -16,8 +16,8 @@ ClientRoutes = APIRouter()
 
 @ClientRoutes.get("/get/profil" , response_model=UserResponse)
 async  def ProfilUserr(currentUser : User = Depends(require_role(RoleUser.CLIENT)) ,
-                       db :Session = Depends(get_db)
-                       ) :
+                        db :Session = Depends(get_db)
+                        ) :
 
     # injection de dependance
     ContollerUser = Profilcontroller(db)
