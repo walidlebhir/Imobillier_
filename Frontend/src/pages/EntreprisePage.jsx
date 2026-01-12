@@ -1,6 +1,7 @@
 import React from 'react'
 import NavBarApp from '../Components/NavBarApp'
 import Footer from '../Components/Fotter'
+import dashManag from "../assets/dashbord.png"
 
 
 import { Link } from 'react-router-dom'
@@ -57,52 +58,17 @@ export default function EntreprisePage() {
                 </button>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-8 border border-gray-200">
+            <div className=" from-blue-50 to-indigo-100 rounded-2xl p-8 border border-gray-200">
               <div className="bg-white rounded-xl shadow-lg p-6">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex space-x-2">
-                    <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                  </div>
-                  <div className="text-sm text-gray-500">Tableau de Bord - Immobilier Pro</div>
-                </div>
+                  <img 
+                        src={dashManag} 
+                        alt="Interface IA"
+                        className="rounded-xl w-full object-cover "
+                    />
                 
                 {/* Dashboard Preview */}
                 <div className="space-y-4">
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="bg-blue-50 p-4 rounded-lg text-center">
-                      <div className="text-2xl font-bold text-blue-600">12</div>
-                      <div className="text-xs text-gray-600">Nouveaux Contacts</div>
-                    </div>
-                    <div className="bg-green-50 p-4 rounded-lg text-center">
-                      <div className="text-2xl font-bold text-green-600">8</div>
-                      <div className="text-xs text-gray-600">Rendez-vous</div>
-                    </div>
-                    <div className="bg-purple-50 p-4 rounded-lg text-center">
-                      <div className="text-2xl font-bold text-purple-600">3</div>
-                      <div className="text-xs text-gray-600">Transactions</div>
-                    </div>
-                  </div>
                   
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium">Activité Récente</span>
-                      <span className="text-xs text-gray-500">Aujourd'hui</span>
-                    </div>
-                    <div className="space-y-2">
-                      {[
-                        "Nouveau message de Sophie M.",
-                        "Rendez-vous confirmé - 15:00",
-                        "Document signé - Villa Les Pins"
-                      ].map((item, index) => (
-                        <div key={index} className="flex items-center text-sm">
-                          <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                          {item}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

@@ -1,0 +1,5 @@
+.env
+__pycache__/
+# Ignore Chroma DB data created by local runs
+src/ML/chroma_data/
+chroma_data/

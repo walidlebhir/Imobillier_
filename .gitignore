@@ -1,0 +1,62 @@
+# Python
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# Environment / secrets
+.env
+.env.*
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+.mypy_cache/
+.pytest_cache/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Databases
+*.sqlite3
+# Chroma DB / local vector stores
+**/chroma_data/
+
+# Logs
+*.log
+logs/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln
+
+# Node / Frontend
+node_modules/
+/Frontend/node_modules/
+# Vite / frontend build output
+Frontend/dist/
+dist/
+
+# Package manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS generated files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Misc
+*.tmp
+*.bak

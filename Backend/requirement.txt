@@ -23,7 +23,8 @@ scikit-learn==1.3.2
 sentence-transformers==2.2.2
 torch>=2.2.0
 transformers==4.40.2
-huggingface-hub==0.19.5
+huggingface-hub>=0.19.3,<1.0
 cloudinary==1.36.0
 
+# Recherche vectorielle
 chromadb==0.5.23

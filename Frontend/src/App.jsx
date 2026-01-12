@@ -19,6 +19,8 @@ import Dashbord from "./pages/Gestionaire/Dashbord"
 import CreateEntreprise from "./pages/Gestionaire/CreateEntreprise"
 import Propritaire from "./pages/Gestionaire/Propritaire"
 import ReservationPage from "./pages/Gestionaire/ReservationPage"
+import PredictionPage from "./pages/Gestionaire/PredictionPage"
+import SearchAI from "./pages/Gestionaire/searchAI"
 
 function App() {
 
@@ -80,7 +82,8 @@ function App() {
           <Route path="/entreprise/dashbord" element = {<Dashbord />} />
           <Route path="/propritaire"  element={<Propritaire />} />
           <Route path="/reservation/entreprise" element = {<ReservationPage />} /> 
-          
+          <Route path="/prediction/ai" element = {<PredictionPage />} /> 
+          <Route path="/search/ai" element={<SearchAI />} />
         </Route>
 
 

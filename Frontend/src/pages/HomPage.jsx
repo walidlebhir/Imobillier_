@@ -1,6 +1,7 @@
 import React from 'react'
 import NavBarApp from '../Components/NavBarApp' 
 import Footer from '../Components/Fotter'
+import Dashimage from "../assets/dahsbordapp.jpeg"
 
 // Import des icônes Heroicons
 import {
@@ -40,6 +41,7 @@ import {
   ChartBarSquareIcon,
   HeartIcon
 } from '@heroicons/react/24/outline'
+import Dashboard from './Gestionaire/Dashbord'
 
 export default function HomePage() {
   return (
@@ -182,11 +184,11 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 border border-gray-200 shadow-lg">
+            <div className=" from-blue-50 to-purple-50 rounded-2xl p-8  ">
               <img 
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                src={Dashimage} 
                 alt="Interface IA"
-                className="rounded-xl w-full h-96 object-cover"
+                className="rounded-xl w-full object-cover "
               />
             </div>
           </div>

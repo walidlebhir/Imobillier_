@@ -1,8 +1,7 @@
 from fastapi import HTTPException
 from src.Models.User import User
-from fastapi.security import OAuth2PasswordRequestForm
 from src.Validation.AuthDto import RegisterRequest , LoginRequest
-from src.Security.Authentication.ConfigSecurity import Hash_password , Authentication
+from src.Security.Authentication.ConfigSecurity import hash_password , authenticate
 from src.Security.Authentication.Jwt_token import create_access_token
 
 
@@ -24,7 +23,7 @@ class AuthController :
 
 
         # creation des donnes 
-        HashPassword = Hash_password(UserRegister.password) 
+        HashPassword = hash_password(UserRegister.password) 
         NewUser = User(
             Nom = UserRegister.Nom , 
             email = UserRegister.email , 
@@ -55,7 +54,7 @@ class AuthController :
 
 
     def Login(self , dataLogin : LoginRequest ) : 
-        userAuth = Authentication(self.db , dataLogin.username , dataLogin.password) 
+        userAuth = authenticate(self.db , dataLogin.username , dataLogin.password) 
         if not userAuth : 
             raise HTTPException(
                 status_code=401 , 

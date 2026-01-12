@@ -8,8 +8,9 @@ import {
   FiCalendar, 
   FiHeart,
   FiTrendingUp,
+  FiCpu, 
+  FiHome,
 
-    FiHome,
   FiUsers
 } from 'react-icons/fi';
 
@@ -44,7 +45,14 @@ export default function SidebareManger() {
     id: 'prediction', 
     label: 'AI Prediction', 
     icon: <FiTrendingUp size={20} />, 
-    path: "/ai/prediction" 
+    path: "/prediction/ai" 
+  },
+
+  { 
+    id: 'ai search', 
+    label: 'AI search', 
+    icon: <FiCpu size={20} />, 
+    path: "/search/ai" 
   },
 
   { 
